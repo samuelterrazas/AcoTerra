@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AcoTerra.API.Data.Entities.Customers;
 
-public sealed class Customer : Actor
+internal sealed class Customer : Actor
 {
 }
 

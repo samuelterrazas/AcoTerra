@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AcoTerra.API.Data.Entities.Freights;
 
-public sealed class ShipmentProducer
+internal sealed class ShipmentProducer
 {
     public Guid ShipmentId { get; init; }
     public Guid ProducerId { get; init; }

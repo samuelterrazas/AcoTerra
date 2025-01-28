@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AcoTerra.API.Data.Entities.Products;
 
-public sealed class Product : AuditableEntity
+internal sealed class Product : AuditableEntity
 {
     public required Guid Id { get; set; }
     public required string Name { get; set; }

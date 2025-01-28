@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcoTerra.API.Data.Entities.Vehicles;
 
-public sealed class AdditionalEquipment : AuditableEntity
+internal sealed class AdditionalEquipment : AuditableEntity
 {
     public required Guid Id { get; set; }
     public required string Name { get; set; }

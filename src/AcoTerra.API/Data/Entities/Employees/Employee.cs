@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcoTerra.API.Data.Entities.Employees;
 
-public sealed class Employee : Actor
+internal sealed class Employee : Actor
 {
     public required EmploymentStatus EmploymentStatus { get; set; }
     public required DateOnly DateOfBirth { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace AcoTerra.API.Data.Entities.Employees.Enums;
 
-public enum EmploymentStatus
+internal enum EmploymentStatus
 {
     None,
     Active,

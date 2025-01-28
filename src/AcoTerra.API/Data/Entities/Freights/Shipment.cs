@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AcoTerra.API.Data.Entities.Freights;
 
-public sealed class Shipment : AuditableEntity
+internal sealed class Shipment : AuditableEntity
 {
     public required Guid Id { get; set; }
     public required string Number { get; set; }

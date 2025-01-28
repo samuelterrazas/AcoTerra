@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AcoTerra.API.Data.Entities.Producers;
 
-public sealed class Producer : Actor
+internal sealed class Producer : Actor
 {
 }
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcoTerra.API.Data.Entities.Vehicles;
 
-public sealed class MaintenanceHistory : AuditableEntity
+internal sealed class MaintenanceHistory : AuditableEntity
 {
     public required Guid Id { get; set; }
     public required DateOnly Date { get; set; }

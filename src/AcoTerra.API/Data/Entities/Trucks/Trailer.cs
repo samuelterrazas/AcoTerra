@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AcoTerra.API.Data.Entities.Trucks;
 
-public sealed class Trailer : AuditableEntity
+internal sealed class Trailer : AuditableEntity
 {
     public Guid Id { get; set; }
     public required string LicensePlate { get; set; }

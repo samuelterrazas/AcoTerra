@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcoTerra.API.Data.Entities.Vehicles;
 
-public sealed class TrafficFine : AuditableEntity
+internal sealed class TrafficFine : AuditableEntity
 {
     public required Guid Id { get; set; }
     public required TrafficViolation Violation { get; set; }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcoTerra.API.Data.Entities.Actors;
 
-public abstract class Actor : AuditableEntity
+internal abstract class Actor : AuditableEntity
 {
     public required Guid Id { get; set; }
     public required string Name { get; set; }

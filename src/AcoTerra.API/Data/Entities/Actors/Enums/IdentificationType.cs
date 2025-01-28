@@ -1,6 +1,6 @@
 ﻿namespace AcoTerra.API.Data.Entities.Actors.Enums;
 
-public enum IdentificationType
+internal enum IdentificationType
 {
     None,
     DNI,

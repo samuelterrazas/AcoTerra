@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AcoTerra.API.Data.Entities.Vehicles;
 
-public sealed class FinancialInformation : AuditableEntity
+internal sealed class FinancialInformation : AuditableEntity
 {
     public Guid Id { get; set; }
     public decimal PurchasePrice { get; set; }

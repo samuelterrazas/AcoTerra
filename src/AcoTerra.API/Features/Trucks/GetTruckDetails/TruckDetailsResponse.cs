@@ -2,7 +2,7 @@
 
 namespace AcoTerra.API.Features.Trucks.GetTruckDetails;
 
-public sealed record TruckDetailsResponse(
+internal sealed record TruckDetailsResponse(
     Guid Id,
     string LicensePlate,
     string Brand,

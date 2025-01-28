@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AcoTerra.API.Data.Entities.Trucks;
 
-public sealed class Truck : Vehicle
+internal sealed class Truck : Vehicle
 {
     public Trailer? Trailer { get; set; }
 }

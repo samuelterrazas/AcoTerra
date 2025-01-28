@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcoTerra.API.Data.Entities.LegalDocuments;
 
-public sealed class LegalDocument : AuditableEntity
+internal sealed class LegalDocument : AuditableEntity
 {
     public required Guid Id { get; set; }
     public required LegalDocumentType Type { get; set; }

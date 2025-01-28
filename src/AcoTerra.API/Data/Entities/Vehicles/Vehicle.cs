@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AcoTerra.API.Data.Entities.Vehicles;
 
-public abstract class Vehicle : AuditableEntity
+internal abstract class Vehicle : AuditableEntity
 {
     public required Guid Id { get; set; }
     public required string LicensePlate { get; set; }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcoTerra.API.Data.Entities.Vehicles;
 
-public sealed class TechnicalInformation : AuditableEntity
+internal sealed class TechnicalInformation : AuditableEntity
 {
     public Guid Id { get; set; }
     public double CurrentMileage { get; set; }
