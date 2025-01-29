@@ -1,5 +1,4 @@
-﻿using AcoTerra.API.Data.Entities.Common;
-using AcoTerra.API.Data.Entities.Customers;
+﻿using AcoTerra.API.Data.Entities.Customers;
 using AcoTerra.API.Data.Entities.Freights.ValueObjects;
 using AcoTerra.API.Data.Entities.Producers;
 using AcoTerra.API.Data.Entities.Products;
@@ -10,19 +9,21 @@ namespace AcoTerra.API.Data.Entities.Freights;
 
 internal sealed class Shipment : AuditableEntity
 {
-    public required Guid Id { get; set; }
+    public int Id { get; set; }
     public required string Number { get; set; }
-    public required Location Origin { get; set; }
+    public required Location Origin { get; set; } 
     public required Location Destination { get; set; }
     public required double Quantity { get; set; }
     public required decimal Price { get; set; }
     
-    public Guid FreightId { get; set; }
+    public int FreightId { get; set; }
     public Freight Freight { get; set; } = null!;
-    public Guid CustomerId { get; set; }
+    public int CustomerId { get; set; }
     public Customer Customer { get; set; } = null!;
-    public ICollection<Producer> Producers { get; set; } = [];
-    public ICollection<Product> Products { get; set; } = [];
+    public int ProducerId { get; set; }
+    public Producer Producer { get; set; } = null!;
+    public int ProductId { get; set; }
+    public Product Product { get; set; } = null!;
 }
 
 internal sealed class ShipmentConfiguration : IEntityTypeConfiguration<Shipment>
@@ -34,7 +35,7 @@ internal sealed class ShipmentConfiguration : IEntityTypeConfiguration<Shipment>
         builder.HasKey(shipment => shipment.Id);
         
         builder.Property(shipment => shipment.Id)
-            .ValueGeneratedNever();
+            .ValueGeneratedOnAdd();
 
         builder.OwnsOne(shipment => shipment.Origin);
         
@@ -45,12 +46,14 @@ internal sealed class ShipmentConfiguration : IEntityTypeConfiguration<Shipment>
             .HasForeignKey(shipment => shipment.CustomerId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasMany(shipment => shipment.Producers)
+        builder.HasOne(shipment => shipment.Producer)
             .WithMany()
-            .UsingEntity<ShipmentProducer>();
+            .HasForeignKey(shipment => shipment.ProducerId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasMany(shipment => shipment.Products)
+        builder.HasOne(shipment => shipment.Product)
             .WithMany()
-            .UsingEntity<ShipmentProduct>();
+            .HasForeignKey(shipment => shipment.ProductId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

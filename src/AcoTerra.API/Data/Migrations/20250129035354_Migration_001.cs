@@ -15,12 +15,13 @@ namespace AcoTerra.API.Data.Migrations
                 name: "additional_equipment",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     name = table.Column<string>(type: "TEXT", nullable: false),
                     description = table.Column<string>(type: "TEXT", nullable: true),
                     cost = table.Column<decimal>(type: "TEXT", nullable: false),
-                    condition = table.Column<string>(type: "TEXT", nullable: false),
-                    vehicle_id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    condition = table.Column<int>(type: "INTEGER", nullable: false),
+                    vehicle_id = table.Column<int>(type: "INTEGER", nullable: false),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -33,9 +34,10 @@ namespace AcoTerra.API.Data.Migrations
                 name: "customers",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     name = table.Column<string>(type: "TEXT", nullable: false),
-                    identification_type = table.Column<string>(type: "TEXT", nullable: false),
+                    identification_type = table.Column<int>(type: "INTEGER", nullable: false),
                     identification_number = table.Column<string>(type: "TEXT", nullable: false),
                     phone_number = table.Column<string>(type: "TEXT", nullable: false),
                     email = table.Column<string>(type: "TEXT", nullable: true),
@@ -51,13 +53,14 @@ namespace AcoTerra.API.Data.Migrations
                 name: "employees",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     name = table.Column<string>(type: "TEXT", nullable: false),
-                    identification_type = table.Column<string>(type: "TEXT", nullable: false),
+                    identification_type = table.Column<int>(type: "INTEGER", nullable: false),
                     identification_number = table.Column<string>(type: "TEXT", nullable: false),
                     phone_number = table.Column<string>(type: "TEXT", nullable: false),
                     email = table.Column<string>(type: "TEXT", nullable: true),
-                    employment_status = table.Column<string>(type: "TEXT", nullable: false),
+                    employment_status = table.Column<int>(type: "INTEGER", nullable: false),
                     date_of_birth = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     emergency_contacts = table.Column<string>(type: "TEXT", nullable: true),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -72,12 +75,12 @@ namespace AcoTerra.API.Data.Migrations
                 name: "financial_information",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     purchase_price = table.Column<decimal>(type: "TEXT", nullable: false),
                     financed = table.Column<bool>(type: "INTEGER", nullable: false),
                     installments = table.Column<int>(type: "INTEGER", nullable: false),
                     outstanding_balance = table.Column<decimal>(type: "TEXT", nullable: false),
-                    vehicle_id = table.Column<Guid>(type: "TEXT", nullable: false),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -90,12 +93,13 @@ namespace AcoTerra.API.Data.Migrations
                 name: "legal_documents",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    type = table.Column<string>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    type = table.Column<int>(type: "INTEGER", nullable: false),
                     document = table.Column<string>(type: "TEXT", nullable: false),
                     expiration_date = table.Column<DateOnly>(type: "TEXT", nullable: true),
-                    vehicle_id = table.Column<Guid>(type: "TEXT", nullable: true),
-                    actor_id = table.Column<Guid>(type: "TEXT", nullable: true),
+                    vehicle_id = table.Column<int>(type: "INTEGER", nullable: true),
+                    actor_id = table.Column<int>(type: "INTEGER", nullable: true),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -108,13 +112,14 @@ namespace AcoTerra.API.Data.Migrations
                 name: "maintenance_history",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     date = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    type = table.Column<string>(type: "TEXT", nullable: false),
+                    type = table.Column<int>(type: "INTEGER", nullable: false),
                     cost = table.Column<decimal>(type: "TEXT", nullable: false),
                     tires = table.Column<string>(type: "TEXT", nullable: true),
                     document = table.Column<string>(type: "TEXT", nullable: true),
-                    vehicle_id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    vehicle_id = table.Column<int>(type: "INTEGER", nullable: false),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -127,9 +132,10 @@ namespace AcoTerra.API.Data.Migrations
                 name: "producers",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     name = table.Column<string>(type: "TEXT", nullable: false),
-                    identification_type = table.Column<string>(type: "TEXT", nullable: false),
+                    identification_type = table.Column<int>(type: "INTEGER", nullable: false),
                     identification_number = table.Column<string>(type: "TEXT", nullable: false),
                     phone_number = table.Column<string>(type: "TEXT", nullable: false),
                     email = table.Column<string>(type: "TEXT", nullable: true),
@@ -145,7 +151,8 @@ namespace AcoTerra.API.Data.Migrations
                 name: "products",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     name = table.Column<string>(type: "TEXT", nullable: false),
                     price_per_package = table.Column<decimal>(type: "TEXT", nullable: false),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -160,12 +167,12 @@ namespace AcoTerra.API.Data.Migrations
                 name: "technical_information",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     current_mileage = table.Column<double>(type: "REAL", nullable: false),
-                    fuel_type = table.Column<string>(type: "TEXT", nullable: false),
+                    fuel_type = table.Column<int>(type: "INTEGER", nullable: false),
                     average_consumption = table.Column<double>(type: "REAL", nullable: false),
                     tank_size = table.Column<double>(type: "REAL", nullable: false),
-                    vehicle_id = table.Column<Guid>(type: "TEXT", nullable: false),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -178,13 +185,14 @@ namespace AcoTerra.API.Data.Migrations
                 name: "traffic_fines",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    violation = table.Column<string>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    violation = table.Column<int>(type: "INTEGER", nullable: false),
                     amount = table.Column<decimal>(type: "TEXT", nullable: false),
                     date_issued = table.Column<DateTime>(type: "TEXT", nullable: false),
                     paid_at = table.Column<DateOnly>(type: "TEXT", nullable: true),
                     document = table.Column<string>(type: "TEXT", nullable: true),
-                    vehicle_id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    vehicle_id = table.Column<int>(type: "INTEGER", nullable: false),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -197,7 +205,8 @@ namespace AcoTerra.API.Data.Migrations
                 name: "trucks",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     license_plate = table.Column<string>(type: "TEXT", nullable: false),
                     brand = table.Column<string>(type: "TEXT", nullable: false),
                     model = table.Column<string>(type: "TEXT", nullable: false),
@@ -216,15 +225,16 @@ namespace AcoTerra.API.Data.Migrations
                 name: "freight",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     number = table.Column<string>(type: "TEXT", nullable: false),
                     origin = table.Column<string>(type: "TEXT", nullable: false),
                     destination = table.Column<string>(type: "TEXT", nullable: false),
                     total_quantity = table.Column<double>(type: "REAL", nullable: false),
                     total_price = table.Column<decimal>(type: "TEXT", nullable: false),
                     remarks = table.Column<string>(type: "TEXT", nullable: true),
-                    vehicle_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    employee_id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    vehicle_id = table.Column<int>(type: "INTEGER", nullable: false),
+                    employee_id = table.Column<int>(type: "INTEGER", nullable: false),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -243,10 +253,11 @@ namespace AcoTerra.API.Data.Migrations
                 name: "trailers",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     license_plate = table.Column<string>(type: "TEXT", nullable: false),
                     capacity = table.Column<double>(type: "REAL", nullable: false),
-                    truck_id = table.Column<Guid>(type: "TEXT", nullable: true),
+                    truck_id = table.Column<int>(type: "INTEGER", nullable: true),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -265,7 +276,8 @@ namespace AcoTerra.API.Data.Migrations
                 name: "shipments",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     number = table.Column<string>(type: "TEXT", nullable: false),
                     origin_latitude = table.Column<double>(type: "REAL", nullable: false),
                     origin_longitude = table.Column<double>(type: "REAL", nullable: false),
@@ -273,8 +285,10 @@ namespace AcoTerra.API.Data.Migrations
                     destination_longitude = table.Column<double>(type: "REAL", nullable: false),
                     quantity = table.Column<double>(type: "REAL", nullable: false),
                     price = table.Column<decimal>(type: "TEXT", nullable: false),
-                    freight_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    customer_id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    freight_id = table.Column<int>(type: "INTEGER", nullable: false),
+                    customer_id = table.Column<int>(type: "INTEGER", nullable: false),
+                    producer_id = table.Column<int>(type: "INTEGER", nullable: false),
+                    product_id = table.Column<int>(type: "INTEGER", nullable: false),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -293,14 +307,26 @@ namespace AcoTerra.API.Data.Migrations
                         principalTable: "freight",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_shipments_producer_producer_id",
+                        column: x => x.producer_id,
+                        principalTable: "producers",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "fk_shipments_product_product_id",
+                        column: x => x.product_id,
+                        principalTable: "products",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "shipments_producers",
                 columns: table => new
                 {
-                    shipment_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    producer_id = table.Column<Guid>(type: "TEXT", nullable: false)
+                    shipment_id = table.Column<int>(type: "INTEGER", nullable: false),
+                    producer_id = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -323,8 +349,8 @@ namespace AcoTerra.API.Data.Migrations
                 name: "shipments_products",
                 columns: table => new
                 {
-                    shipment_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    product_id = table.Column<Guid>(type: "TEXT", nullable: false)
+                    shipment_id = table.Column<int>(type: "INTEGER", nullable: false),
+                    product_id = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -347,12 +373,6 @@ namespace AcoTerra.API.Data.Migrations
                 name: "ix_additional_equipment_vehicle_id",
                 table: "additional_equipment",
                 column: "vehicle_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_financial_information_vehicle_id",
-                table: "financial_information",
-                column: "vehicle_id",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_freight_employee_id",
@@ -390,6 +410,16 @@ namespace AcoTerra.API.Data.Migrations
                 column: "freight_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_shipments_producer_id",
+                table: "shipments",
+                column: "producer_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_shipments_product_id",
+                table: "shipments",
+                column: "product_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_shipments_producers_producer_id",
                 table: "shipments_producers",
                 column: "producer_id");
@@ -398,12 +428,6 @@ namespace AcoTerra.API.Data.Migrations
                 name: "ix_shipments_products_product_id",
                 table: "shipments_products",
                 column: "product_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_technical_information_vehicle_id",
-                table: "technical_information",
-                column: "vehicle_id",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_traffic_fines_vehicle_id",
@@ -448,12 +472,6 @@ namespace AcoTerra.API.Data.Migrations
                 name: "trailers");
 
             migrationBuilder.DropTable(
-                name: "producers");
-
-            migrationBuilder.DropTable(
-                name: "products");
-
-            migrationBuilder.DropTable(
                 name: "shipments");
 
             migrationBuilder.DropTable(
@@ -464,6 +482,12 @@ namespace AcoTerra.API.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "freight");
+
+            migrationBuilder.DropTable(
+                name: "producers");
+
+            migrationBuilder.DropTable(
+                name: "products");
 
             migrationBuilder.DropTable(
                 name: "employees");

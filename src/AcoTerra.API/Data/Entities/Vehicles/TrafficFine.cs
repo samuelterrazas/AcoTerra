@@ -1,21 +1,19 @@
-﻿using AcoTerra.API.Data.Entities.Common;
-using AcoTerra.API.Data.Entities.Vehicles.Enums;
+﻿using AcoTerra.API.Data.Entities.Vehicles.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcoTerra.API.Data.Entities.Vehicles;
 
 internal sealed class TrafficFine : AuditableEntity
 {
-    public required Guid Id { get; set; }
+    public int Id { get; set; }
     public required TrafficViolation Violation { get; set; }
     public required decimal Amount { get; set; }
     public required DateTime DateIssued { get; set; }
     public DateOnly? PaidAt { get; set; }
     public string? Document { get; set; }
     
-    public required Guid VehicleId { get; set; }
+    public int VehicleId { get; set; }
 }
 
 internal sealed class TrafficFineConfiguration : IEntityTypeConfiguration<TrafficFine>
@@ -24,12 +22,9 @@ internal sealed class TrafficFineConfiguration : IEntityTypeConfiguration<Traffi
     {
         builder.ToTable("traffic_fines");
 
-        builder.HasKey(fine => fine.Id);
+        builder.HasKey(trafficFine => trafficFine.Id);
         
-        builder.Property(fine => fine.Id)
-            .ValueGeneratedNever();
-
-        builder.Property(fine => fine.Violation)
-            .HasConversion(new EnumToStringConverter<TrafficViolation>());
+        builder.Property(trafficFine => trafficFine.Id)
+            .ValueGeneratedOnAdd();
     }
 }

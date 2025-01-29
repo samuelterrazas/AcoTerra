@@ -9,10 +9,10 @@ namespace AcoTerra.API.Features.Trucks.UpdateTruck;
 internal sealed class UpdateTruckEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app) =>
-        app.MapPut("/{id:guid}", Handle);
+        app.MapPut("/{id:int}", Handle);
 
     private static async Task<Results<NoContent, NotFound>> Handle(
-        Guid id,
+        int id,
         UpdateTruckRequest request,
         ApplicationDbContext dbContext,
         CancellationToken cancellationToken

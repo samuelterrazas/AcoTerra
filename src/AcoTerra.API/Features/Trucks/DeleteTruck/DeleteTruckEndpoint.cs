@@ -9,10 +9,10 @@ namespace AcoTerra.API.Features.Trucks.DeleteTruck;
 internal sealed class DeleteTruckEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app) =>
-        app.MapDelete("/{id:guid}", Handle);
+        app.MapDelete("/{id:int}", Handle);
 
     private static async Task<Results<NoContent, NotFound>> Handle(
-        Guid id,
+        int id,
         ApplicationDbContext dbContext,
         CancellationToken cancellationToken
     )

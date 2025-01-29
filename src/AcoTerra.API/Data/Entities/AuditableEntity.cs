@@ -1,4 +1,4 @@
-﻿namespace AcoTerra.API.Data.Entities.Common;
+﻿namespace AcoTerra.API.Data.Entities;
 
 internal abstract class AuditableEntity
 {

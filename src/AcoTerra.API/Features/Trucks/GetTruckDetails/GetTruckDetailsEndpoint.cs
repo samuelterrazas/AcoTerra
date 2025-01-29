@@ -9,10 +9,10 @@ namespace AcoTerra.API.Features.Trucks.GetTruckDetails;
 internal sealed class GetTruckDetailsEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app) => app
-        .MapGet("/{id:guid}", Handle);
+        .MapGet("/{id:int}", Handle);
     
     private static async Task<Results<Ok<TruckDetailsResponse>, NotFound>> Handle(
-        Guid id,
+        int id,
         ApplicationDbContext dbContext,
         CancellationToken cancellationToken
     )

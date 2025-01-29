@@ -1,6 +1,6 @@
 ﻿namespace AcoTerra.API.Data.Entities.Vehicles.Enums;
 
-public enum MaintenanceType
+internal enum MaintenanceType
 {
     None,
     OilChange,

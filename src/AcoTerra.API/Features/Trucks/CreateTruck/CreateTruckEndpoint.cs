@@ -12,7 +12,7 @@ internal sealed class CreateTruckEndpoint : IEndpoint
     public static void Map(IEndpointRouteBuilder app) =>
         app.MapPost("/", Handle);
     
-    private static async Task<Created<Guid>> Handle(
+    private static async Task<Created<int>> Handle(
         CreateTruckRequest request,
         ApplicationDbContext dbContext,
         CancellationToken cancellationToken
@@ -20,7 +20,6 @@ internal sealed class CreateTruckEndpoint : IEndpoint
     {
         var truck = new Truck
         {
-            Id = Guid.NewGuid(),
             LicensePlate = request.LicensePlate,
             Brand = request.Brand,
             Model = request.Model,

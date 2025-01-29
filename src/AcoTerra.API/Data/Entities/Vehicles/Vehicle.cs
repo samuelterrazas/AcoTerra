@@ -1,5 +1,4 @@
-﻿using AcoTerra.API.Data.Entities.Common;
-using AcoTerra.API.Data.Entities.LegalDocuments;
+﻿using AcoTerra.API.Data.Entities.LegalDocuments;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -7,7 +6,7 @@ namespace AcoTerra.API.Data.Entities.Vehicles;
 
 internal abstract class Vehicle : AuditableEntity
 {
-    public required Guid Id { get; set; }
+    public int Id { get; set; }
     public required string LicensePlate { get; set; }
     public required string Brand { get; set; }
     public required string Model { get; set; }
@@ -30,9 +29,6 @@ internal sealed class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
         builder.UseTpcMappingStrategy();
 
         builder.HasKey(vehicle => vehicle.Id);
-        
-        builder.Property(vehicle => vehicle.Id)
-            .ValueGeneratedNever();
 
         builder.HasOne(vehicle => vehicle.TechnicalInformation)
             .WithOne()

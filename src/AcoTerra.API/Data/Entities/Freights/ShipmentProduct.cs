@@ -6,8 +6,8 @@ namespace AcoTerra.API.Data.Entities.Freights;
 
 internal sealed class ShipmentProduct
 {
-    public Guid ShipmentId { get; init; }
-    public Guid ProductId { get; init; }
+    public int ShipmentId { get; init; }
+    public int ProductId { get; init; }
 }
 
 internal sealed class ShipmentProductConfiguration : IEntityTypeConfiguration<ShipmentProduct>

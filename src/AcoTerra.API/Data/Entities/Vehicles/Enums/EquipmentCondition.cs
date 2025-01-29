@@ -1,6 +1,6 @@
 ﻿namespace AcoTerra.API.Data.Entities.Vehicles.Enums;
 
-public enum EquipmentCondition
+internal enum EquipmentCondition
 {
     None,
     New,

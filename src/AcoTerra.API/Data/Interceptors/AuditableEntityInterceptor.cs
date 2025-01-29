@@ -1,4 +1,4 @@
-﻿using AcoTerra.API.Data.Entities.Common;
+﻿using AcoTerra.API.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;

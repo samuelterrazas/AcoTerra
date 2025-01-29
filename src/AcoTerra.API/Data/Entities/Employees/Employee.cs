@@ -2,7 +2,6 @@
 using AcoTerra.API.Data.Entities.Employees.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcoTerra.API.Data.Entities.Employees;
 
@@ -18,8 +17,8 @@ internal sealed class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
     public void Configure(EntityTypeBuilder<Employee> builder)
     {
         builder.ToTable("employees");
-
-        builder.Property(employee => employee.EmploymentStatus)
-            .HasConversion(new EnumToStringConverter<EmploymentStatus>());
+        
+        builder.Property(employee => employee.Id)
+            .ValueGeneratedOnAdd();
     }
 }

@@ -1,16 +1,15 @@
-﻿using AcoTerra.API.Data.Entities.Common;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AcoTerra.API.Data.Entities.Trucks;
 
 internal sealed class Trailer : AuditableEntity
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public required string LicensePlate { get; set; }
     public double Capacity { get; set; }
     
-    public Guid? TruckId { get; set; }
+    public int? TruckId { get; set; }
 }
 
 internal sealed class TrailerConfiguration : IEntityTypeConfiguration<Trailer>
@@ -22,6 +21,6 @@ internal sealed class TrailerConfiguration : IEntityTypeConfiguration<Trailer>
         builder.HasKey(trailer => trailer.Id);
         
         builder.Property(trailer => trailer.Id)
-            .ValueGeneratedNever();
+            .ValueGeneratedOnAdd();
     }
 }

@@ -1,14 +1,12 @@
-﻿using AcoTerra.API.Data.Entities.Common;
-using AcoTerra.API.Data.Entities.Vehicles.Enums;
+﻿using AcoTerra.API.Data.Entities.Vehicles.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcoTerra.API.Data.Entities.Vehicles;
 
 internal sealed class TechnicalInformation : AuditableEntity
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public double CurrentMileage { get; set; }
     public FuelType FuelType { get; set; }
     public double AverageConsumption { get; set; }
@@ -21,12 +19,9 @@ internal sealed class TechnicalInformationConfiguration : IEntityTypeConfigurati
     {
         builder.ToTable("technical_information");
 
-        builder.HasKey(information => information.Id);
+        builder.HasKey(technicalInfo => technicalInfo.Id);
         
-        builder.Property(information => information.Id)
-            .ValueGeneratedNever();
-
-        builder.Property(information => information.FuelType)
-            .HasConversion(new EnumToStringConverter<FuelType>());
+        builder.Property(technicalInfo => technicalInfo.Id)
+            .ValueGeneratedOnAdd();
     }
 }

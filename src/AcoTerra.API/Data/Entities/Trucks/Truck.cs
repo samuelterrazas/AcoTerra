@@ -14,6 +14,9 @@ internal sealed class TruckConfiguration : IEntityTypeConfiguration<Truck>
     public void Configure(EntityTypeBuilder<Truck> builder)
     {
         builder.ToTable("trucks");
+        
+        builder.Property(truck => truck.Id)
+            .ValueGeneratedOnAdd();
 
         builder.HasOne(truck => truck.Trailer)
             .WithOne()

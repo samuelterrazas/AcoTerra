@@ -19,8 +19,9 @@ namespace AcoTerra.API.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Actors.Actor", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
                     b.Property<string>("Email")
@@ -32,9 +33,8 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("identification_number");
 
-                    b.Property<string>("IdentificationType")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
+                    b.Property<int>("IdentificationType")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("identification_type");
 
                     b.Property<DateTime>("LastModifiedAt")
@@ -64,8 +64,9 @@ namespace AcoTerra.API.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Freights.Freight", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
                     b.Property<string>("Destination")
@@ -73,8 +74,8 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("destination");
 
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("employee_id");
 
                     b.Property<DateTime>("LastModifiedAt")
@@ -107,8 +108,8 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("REAL")
                         .HasColumnName("total_quantity");
 
-                    b.Property<Guid>("VehicleId")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("vehicle_id");
 
                     b.HasKey("Id")
@@ -125,16 +126,17 @@ namespace AcoTerra.API.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Freights.Shipment", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("customer_id");
 
-                    b.Property<Guid>("FreightId")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("FreightId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("freight_id");
 
                     b.Property<DateTime>("LastModifiedAt")
@@ -154,6 +156,14 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("price");
 
+                    b.Property<int>("ProducerId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("producer_id");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("product_id");
+
                     b.Property<double>("Quantity")
                         .HasColumnType("REAL")
                         .HasColumnName("quantity");
@@ -167,17 +177,23 @@ namespace AcoTerra.API.Data.Migrations
                     b.HasIndex("FreightId")
                         .HasDatabaseName("ix_shipments_freight_id");
 
+                    b.HasIndex("ProducerId")
+                        .HasDatabaseName("ix_shipments_producer_id");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_shipments_product_id");
+
                     b.ToTable("shipments", (string)null);
                 });
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Freights.ShipmentProducer", b =>
                 {
-                    b.Property<Guid>("ShipmentId")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("ShipmentId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("shipment_id");
 
-                    b.Property<Guid>("ProducerId")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("ProducerId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("producer_id");
 
                     b.HasKey("ShipmentId", "ProducerId")
@@ -191,12 +207,12 @@ namespace AcoTerra.API.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Freights.ShipmentProduct", b =>
                 {
-                    b.Property<Guid>("ShipmentId")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("ShipmentId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("shipment_id");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("product_id");
 
                     b.HasKey("ShipmentId", "ProductId")
@@ -210,12 +226,13 @@ namespace AcoTerra.API.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.LegalDocuments.LegalDocument", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
-                    b.Property<Guid?>("ActorId")
-                        .HasColumnType("TEXT")
+                    b.Property<int?>("ActorId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("actor_id");
 
                     b.Property<string>("Document")
@@ -235,13 +252,12 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("last_modified_by");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("type");
 
-                    b.Property<Guid?>("VehicleId")
-                        .HasColumnType("TEXT")
+                    b.Property<int?>("VehicleId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("vehicle_id");
 
                     b.HasKey("Id")
@@ -258,8 +274,9 @@ namespace AcoTerra.API.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Products.Product", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
                     b.Property<DateTime>("LastModifiedAt")
@@ -287,8 +304,9 @@ namespace AcoTerra.API.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Trucks.Trailer", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
                     b.Property<double>("Capacity")
@@ -308,8 +326,8 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("license_plate");
 
-                    b.Property<Guid?>("TruckId")
-                        .HasColumnType("TEXT")
+                    b.Property<int?>("TruckId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("truck_id");
 
                     b.HasKey("Id")
@@ -324,13 +342,13 @@ namespace AcoTerra.API.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Vehicles.AdditionalEquipment", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
-                    b.Property<string>("Condition")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Condition")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("condition");
 
                     b.Property<decimal>("Cost")
@@ -354,8 +372,8 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("name");
 
-                    b.Property<Guid>("VehicleId")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("vehicle_id");
 
                     b.HasKey("Id")
@@ -369,8 +387,9 @@ namespace AcoTerra.API.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Vehicles.FinancialInformation", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
                     b.Property<bool>("Financed")
@@ -405,8 +424,9 @@ namespace AcoTerra.API.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Vehicles.MaintenanceHistory", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
                     b.Property<decimal>("Cost")
@@ -433,13 +453,12 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("tires");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("type");
 
-                    b.Property<Guid>("VehicleId")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("vehicle_id");
 
                     b.HasKey("Id")
@@ -453,8 +472,9 @@ namespace AcoTerra.API.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Vehicles.TechnicalInformation", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
                     b.Property<double>("AverageConsumption")
@@ -465,9 +485,8 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("REAL")
                         .HasColumnName("current_mileage");
 
-                    b.Property<string>("FuelType")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
+                    b.Property<int>("FuelType")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("fuel_type");
 
                     b.Property<DateTime>("LastModifiedAt")
@@ -490,8 +509,9 @@ namespace AcoTerra.API.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Vehicles.TrafficFine", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
                     b.Property<decimal>("Amount")
@@ -518,13 +538,12 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("paid_at");
 
-                    b.Property<Guid>("VehicleId")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("vehicle_id");
 
-                    b.Property<string>("Violation")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Violation")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("violation");
 
                     b.HasKey("Id")
@@ -538,8 +557,9 @@ namespace AcoTerra.API.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Vehicles.Vehicle", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
                     b.Property<string>("Brand")
@@ -605,9 +625,8 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("emergency_contacts");
 
-                    b.Property<string>("EmploymentStatus")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
+                    b.Property<int>("EmploymentStatus")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("employment_status");
 
                     b.ToTable("employees", (string)null);
@@ -664,10 +683,24 @@ namespace AcoTerra.API.Data.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_shipments_freight_freight_id");
 
+                    b.HasOne("AcoTerra.API.Data.Entities.Producers.Producer", "Producer")
+                        .WithMany()
+                        .HasForeignKey("ProducerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_shipments_producer_producer_id");
+
+                    b.HasOne("AcoTerra.API.Data.Entities.Products.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_shipments_product_product_id");
+
                     b.OwnsOne("AcoTerra.API.Data.Entities.Freights.ValueObjects.Location", "Destination", b1 =>
                         {
-                            b1.Property<Guid>("ShipmentId")
-                                .HasColumnType("TEXT")
+                            b1.Property<int>("ShipmentId")
+                                .HasColumnType("INTEGER")
                                 .HasColumnName("id");
 
                             b1.Property<double>("Latitude")
@@ -689,8 +722,8 @@ namespace AcoTerra.API.Data.Migrations
 
                     b.OwnsOne("AcoTerra.API.Data.Entities.Freights.ValueObjects.Location", "Origin", b1 =>
                         {
-                            b1.Property<Guid>("ShipmentId")
-                                .HasColumnType("TEXT")
+                            b1.Property<int>("ShipmentId")
+                                .HasColumnType("INTEGER")
                                 .HasColumnName("id");
 
                             b1.Property<double>("Latitude")
@@ -719,6 +752,10 @@ namespace AcoTerra.API.Data.Migrations
 
                     b.Navigation("Origin")
                         .IsRequired();
+
+                    b.Navigation("Producer");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("AcoTerra.API.Data.Entities.Freights.ShipmentProducer", b =>
