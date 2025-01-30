@@ -24,7 +24,7 @@ internal sealed class SearchProductsEndpoint : IEndpoint
                 Weight: double.Round(faker.Random.Double(min: 10, max: 1500), digits: 2),
                 Price: decimal.Parse(faker.Commerce.Price())
             );
-            
+
             products.Add(product);
         }
 

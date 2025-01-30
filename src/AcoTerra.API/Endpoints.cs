@@ -1,4 +1,5 @@
 ﻿using AcoTerra.API.Common.Abstractions;
+using AcoTerra.API.Features.Producers.SearchProducers;
 using AcoTerra.API.Features.Products.SearchProducts;
 using AcoTerra.API.Features.Trucks.CreateTruck;
 using AcoTerra.API.Features.Trucks.DeleteTruck;
@@ -13,6 +14,7 @@ internal static class Endpoints
     internal static void MapEndpoints(this WebApplication app)
     {
         app.MapTruckEndpoints();
+        app.MapProducerEndpoints();
         app.MapProductEndpoints();
     }
 
@@ -27,6 +29,15 @@ internal static class Endpoints
             .Map<CreateTruckEndpoint>()
             .Map<UpdateTruckEndpoint>()
             .Map<DeleteTruckEndpoint>();
+    }
+    
+    private static void MapProducerEndpoints(this IEndpointRouteBuilder app)
+    {
+        RouteGroupBuilder routeGroup = app.MapGroup("/producers")
+            .WithTags("Producers");
+
+        routeGroup
+            .Map<SearchProducersEndpoint>();
     }
 
     private static void MapProductEndpoints(this IEndpointRouteBuilder app)
