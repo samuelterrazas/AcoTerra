@@ -7,12 +7,11 @@ namespace AcoTerra.API.Data.Entities.Vehicles;
 internal sealed class AdditionalEquipment : AuditableEntity
 {
     public int Id { get; set; }
+    public required int VehicleId { get; set; }
     public required string Name { get; set; }
     public string? Description { get; set; }
     public required decimal Cost { get; set; }
     public required EquipmentCondition Condition { get; set; }
-    
-    public required int VehicleId { get; set; }
 }
 
 internal sealed class AdditionalEquipmentConfiguration : IEntityTypeConfiguration<AdditionalEquipment>

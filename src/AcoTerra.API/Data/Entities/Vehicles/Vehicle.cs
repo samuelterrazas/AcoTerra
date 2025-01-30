@@ -14,8 +14,8 @@ internal abstract class Vehicle : AuditableEntity
     public required string ChassisNumber { get; set; }
     public required string EngineNumber { get; set; }
 
-    public TechnicalInformation TechnicalInformation { get; set; } = null!;
-    public FinancialInformation FinancialInformation { get; set; } = null!;
+    public TechnicalInformation TechnicalInformation { get; set; } = new();
+    public FinancialInformation FinancialInformation { get; set; } = new();
     public ICollection<LegalDocument> LegalDocuments { get; set; } = [];
     public ICollection<MaintenanceHistory> MaintenanceHistory { get; set; } = [];
     public ICollection<TrafficFine> TrafficFines { get; set; } = [];

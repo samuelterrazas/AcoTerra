@@ -2,7 +2,7 @@
 
 internal enum FuelType
 {
-    None,
+    Undefined,
     Diesel,
     CompressedNaturalGas,
     Biodiesel,

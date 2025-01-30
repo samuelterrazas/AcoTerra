@@ -20,7 +20,9 @@ internal sealed class SearchProductsEndpoint : IEndpoint
             var product = new ProductResponse(
                 Id: i + 1,
                 Name: faker.Commerce.Product(),
-                PricePerPackage: decimal.Parse(faker.Commerce.Price())
+                PackagingType: "Palé",
+                Weight: double.Round(faker.Random.Double(min: 10, max: 1500), digits: 2),
+                Price: decimal.Parse(faker.Commerce.Price())
             );
             
             products.Add(product);

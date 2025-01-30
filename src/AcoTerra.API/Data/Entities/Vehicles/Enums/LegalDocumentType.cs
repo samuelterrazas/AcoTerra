@@ -2,7 +2,7 @@
 
 internal enum LegalDocumentType
 {
-    None,
+    Undefined,
     TransportRegistry,
     GreenCard,
     Insurance,

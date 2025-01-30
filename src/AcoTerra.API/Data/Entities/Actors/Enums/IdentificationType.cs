@@ -2,7 +2,7 @@
 
 internal enum IdentificationType
 {
-    None,
+    Undefined,
     DNI,
     CUIT,
     CUIL,

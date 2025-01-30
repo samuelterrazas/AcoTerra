@@ -5,7 +5,9 @@ namespace AcoTerra.API.Features.Products.SearchProducts;
 internal sealed record ProductResponse(
     int Id,
     string Name,
-    decimal PricePerPackage
+    string PackagingType,
+    double Weight,
+    decimal Price
 )
 {
     public static explicit operator ProductResponse(Product product)
@@ -13,7 +15,9 @@ internal sealed record ProductResponse(
         return new ProductResponse(
             Id: product.Id,
             Name: product.Name,
-            PricePerPackage: product.PricePerPackage
+            PackagingType: Enum.GetName(product.PackagingType)!,
+            Weight: product.Weight,
+            Price: product.Price
         );
     }
 }

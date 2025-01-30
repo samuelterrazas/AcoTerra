@@ -22,6 +22,7 @@ internal sealed class GetTruckDetailsEndpoint : IEndpoint
             .AsNoTracking()
             .Include(truck => truck.TechnicalInformation)
             .Include(truck => truck.FinancialInformation)
+            .Include(truck => truck.Trailer)
             .FirstOrDefaultAsync(truck => truck.Id == id, cancellationToken);
 
         if (truck is null)

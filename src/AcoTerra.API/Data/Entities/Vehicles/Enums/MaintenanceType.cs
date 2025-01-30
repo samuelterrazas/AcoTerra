@@ -2,7 +2,7 @@
 
 internal enum MaintenanceType
 {
-    None,
+    Undefined,
     OilChange,
     BrakeInspection,
     TireRotation,

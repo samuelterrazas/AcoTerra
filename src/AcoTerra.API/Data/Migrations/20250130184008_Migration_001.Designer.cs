@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcoTerra.API.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250129035354_Migration_001")]
+    [Migration("20250130184008_Migration_001")]
     partial class Migration_001
     {
         /// <inheritdoc />
@@ -72,11 +72,6 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
-                    b.Property<string>("Destination")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("destination");
-
                     b.Property<int>("EmployeeId")
                         .HasColumnType("INTEGER")
                         .HasColumnName("employee_id");
@@ -89,27 +84,34 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("last_modified_by");
 
+                    b.Property<DateOnly>("LoadingDate")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("loading_date");
+
                     b.Property<string>("Number")
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("number");
 
-                    b.Property<string>("Origin")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("origin");
-
                     b.Property<string>("Remarks")
                         .HasColumnType("TEXT")
                         .HasColumnName("remarks");
 
-                    b.Property<decimal>("TotalPrice")
+                    b.Property<decimal>("TotalFreightCharge")
                         .HasColumnType("TEXT")
-                        .HasColumnName("total_price");
+                        .HasColumnName("total_freight_charge");
 
                     b.Property<double>("TotalQuantity")
                         .HasColumnType("REAL")
                         .HasColumnName("total_quantity");
+
+                    b.Property<double>("TotalWeight")
+                        .HasColumnType("REAL")
+                        .HasColumnName("total_weight");
+
+                    b.Property<DateOnly>("UnloadingDate")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("unloading_date");
 
                     b.Property<int>("VehicleId")
                         .HasColumnType("INTEGER")
@@ -150,6 +152,11 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("last_modified_by");
 
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("location");
+
                     b.Property<string>("Number")
                         .IsRequired()
                         .HasColumnType("TEXT")
@@ -170,6 +177,10 @@ namespace AcoTerra.API.Data.Migrations
                     b.Property<double>("Quantity")
                         .HasColumnType("REAL")
                         .HasColumnName("quantity");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("status");
 
                     b.HasKey("Id")
                         .HasName("pk_shipments");
@@ -295,9 +306,17 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("name");
 
-                    b.Property<decimal>("PricePerPackage")
+                    b.Property<int>("PackagingType")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("packaging_type");
+
+                    b.Property<decimal>("Price")
                         .HasColumnType("TEXT")
-                        .HasColumnName("price_per_package");
+                        .HasColumnName("price");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("REAL")
+                        .HasColumnName("weight");
 
                     b.HasKey("Id")
                         .HasName("pk_products");
@@ -700,61 +719,9 @@ namespace AcoTerra.API.Data.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_shipments_product_product_id");
 
-                    b.OwnsOne("AcoTerra.API.Data.Entities.Freights.ValueObjects.Location", "Destination", b1 =>
-                        {
-                            b1.Property<int>("ShipmentId")
-                                .HasColumnType("INTEGER")
-                                .HasColumnName("id");
-
-                            b1.Property<double>("Latitude")
-                                .HasColumnType("REAL")
-                                .HasColumnName("destination_latitude");
-
-                            b1.Property<double>("Longitude")
-                                .HasColumnType("REAL")
-                                .HasColumnName("destination_longitude");
-
-                            b1.HasKey("ShipmentId");
-
-                            b1.ToTable("shipments");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ShipmentId")
-                                .HasConstraintName("fk_shipments_shipments_id");
-                        });
-
-                    b.OwnsOne("AcoTerra.API.Data.Entities.Freights.ValueObjects.Location", "Origin", b1 =>
-                        {
-                            b1.Property<int>("ShipmentId")
-                                .HasColumnType("INTEGER")
-                                .HasColumnName("id");
-
-                            b1.Property<double>("Latitude")
-                                .HasColumnType("REAL")
-                                .HasColumnName("origin_latitude");
-
-                            b1.Property<double>("Longitude")
-                                .HasColumnType("REAL")
-                                .HasColumnName("origin_longitude");
-
-                            b1.HasKey("ShipmentId");
-
-                            b1.ToTable("shipments");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ShipmentId")
-                                .HasConstraintName("fk_shipments_shipments_id");
-                        });
-
                     b.Navigation("Customer");
 
-                    b.Navigation("Destination")
-                        .IsRequired();
-
                     b.Navigation("Freight");
-
-                    b.Navigation("Origin")
-                        .IsRequired();
 
                     b.Navigation("Producer");
 

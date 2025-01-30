@@ -1,6 +1,4 @@
-﻿using AcoTerra.API.Data.Entities.Vehicles.Enums;
-
-namespace AcoTerra.API.Features.Trucks.CreateTruck;
+﻿namespace AcoTerra.API.Features.Trucks.CreateTruck;
 
 internal sealed record CreateTruckRequest(
     string LicensePlate,
@@ -9,12 +7,10 @@ internal sealed record CreateTruckRequest(
     int ManufacturingYear,
     string ChassisNumber,
     string EngineNumber,
-    double? CurrentMileage,
-    FuelType? FuelType,
-    double? AverageConsumption,
-    double? TankSize,
-    decimal? PurchasePrice,
-    bool? Financed,
-    int? Installments,
-    decimal? OutstandingBalance
+    CreateTrailerRequest? Trailer
+);
+
+internal sealed record CreateTrailerRequest(
+    string LicensePlate,
+    double Capacity
 );

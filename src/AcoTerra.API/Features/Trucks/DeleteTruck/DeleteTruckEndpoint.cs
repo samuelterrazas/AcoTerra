@@ -20,6 +20,7 @@ internal sealed class DeleteTruckEndpoint : IEndpoint
         Truck? truck = await dbContext.Set<Truck>()
             .Include(truck => truck.TechnicalInformation)
             .Include(truck => truck.FinancialInformation)
+            .Include(truck => truck.Trailer)
             .FirstOrDefaultAsync(truck => truck.Id == id, cancellationToken);
 
         if (truck is null)

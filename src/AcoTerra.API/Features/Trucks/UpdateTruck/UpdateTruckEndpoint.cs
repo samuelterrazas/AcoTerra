@@ -21,6 +21,7 @@ internal sealed class UpdateTruckEndpoint : IEndpoint
         Truck? truck = await dbContext.Set<Truck>()
             .Include(truck => truck.TechnicalInformation)
             .Include(truck => truck.FinancialInformation)
+            .Include(truck => truck.Trailer)
             .FirstOrDefaultAsync(truck => truck.Id == id, cancellationToken);
 
         if (truck is null)
@@ -28,6 +29,28 @@ internal sealed class UpdateTruckEndpoint : IEndpoint
             return TypedResults.NotFound();
         }
 
+        if (request.TechnicalInfo is not null)
+        {
+            UpdateTechnicalInformation(request.TechnicalInfo, truck);
+        }
+
+        if (request.FinancialInfo is not null)
+        {
+            UpdateFinancialInformation(request.FinancialInfo, truck);
+        }
+
+        if (request.Trailer is not null)
+        {
+            UpdateTrailer(request.Trailer, truck);
+        }
+
+        await dbContext.SaveChangesAsync(cancellationToken);
+
+        return TypedResults.NoContent();
+    }
+
+    private static void UpdateTechnicalInformation(UpdateTechnicalInformationRequest request, Truck truck)
+    {
         if (request.CurrentMileage.HasValue)
         {
             truck.TechnicalInformation.CurrentMileage = request.CurrentMileage.Value;
@@ -47,7 +70,10 @@ internal sealed class UpdateTruckEndpoint : IEndpoint
         {
             truck.TechnicalInformation.TankSize = request.TankSize.Value;
         }
-        
+    }
+
+    private static void UpdateFinancialInformation(UpdateFinancialInformationRequest request, Truck truck)
+    {
         if (request.PurchasePrice.HasValue)
         {
             truck.FinancialInformation.PurchasePrice = request.PurchasePrice.Value;
@@ -67,9 +93,23 @@ internal sealed class UpdateTruckEndpoint : IEndpoint
         {
             truck.FinancialInformation.OutstandingBalance = request.OutstandingBalance.Value;
         }
+    }
 
-        await dbContext.SaveChangesAsync(cancellationToken);
+    private static void UpdateTrailer(UpdateTrailerRequest request, Truck truck)
+    {
+        if (truck.Trailer is null)
+        {
+            throw new NullReferenceException();
+        }
+        
+        if (request.LicensePlate is not null)
+        {
+            truck.Trailer.LicensePlate = request.LicensePlate;
+        }
 
-        return TypedResults.NoContent();
+        if (request.Capacity.HasValue)
+        {
+            truck.Trailer.Capacity = request.Capacity.Value;
+        }
     }
 }

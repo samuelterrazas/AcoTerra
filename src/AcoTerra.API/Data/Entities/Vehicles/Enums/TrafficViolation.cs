@@ -2,7 +2,7 @@
 
 internal enum TrafficViolation
 {
-    None,
+    Undefined,
     Speeding,
     RunningRedLight,
     IllegalParking,

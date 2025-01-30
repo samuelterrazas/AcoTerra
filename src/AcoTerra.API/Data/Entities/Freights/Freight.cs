@@ -8,16 +8,18 @@ namespace AcoTerra.API.Data.Entities.Freights;
 internal sealed class Freight : AuditableEntity
 {
     public int Id { get; set; }
-    public required string Number { get; set; } 
-    public required string Origin { get; set; }
-    public required string Destination { get; set; }
+    public required string Number { get; set; }
+    public required int VehicleId { get; set; }
+    public required int EmployeeId { get; set; }
+    public required DateOnly LoadingDate { get; set; }
+    public required DateOnly UnloadingDate { get; set; }
     public double TotalQuantity { get; set; }
-    public decimal TotalPrice { get; set; }
+    public double TotalWeight { get; set; }
+    public decimal TotalFreightCharge { get; set; }
     public string? Remarks { get; set; }
     
-    public int VehicleId { get; set; }
+    
     public Vehicle Vehicle { get; set; } = null!;
-    public int EmployeeId { get; set; }
     public Employee Employee { get; set; } = null!;
     public ICollection<Shipment> Shipments { get; set; } = [];
 }

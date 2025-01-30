@@ -1,5 +1,5 @@
 ﻿using AcoTerra.API.Data.Entities.Customers;
-using AcoTerra.API.Data.Entities.Freights.ValueObjects;
+using AcoTerra.API.Data.Entities.Freights.Enums;
 using AcoTerra.API.Data.Entities.Producers;
 using AcoTerra.API.Data.Entities.Products;
 using Microsoft.EntityFrameworkCore;
@@ -10,20 +10,20 @@ namespace AcoTerra.API.Data.Entities.Freights;
 internal sealed class Shipment : AuditableEntity
 {
     public int Id { get; set; }
+    public required int FreightId { get; set; }
     public required string Number { get; set; }
-    public required Location Origin { get; set; } 
-    public required Location Destination { get; set; }
+    public required int ProducerId { get; set; }
+    public required int ProductId { get; set; }
     public required double Quantity { get; set; }
     public required decimal Price { get; set; }
+    public required int CustomerId { get; set; }
+    public required string Location { get; set; }
+    public ShipmentStatus Status { get; set; }
     
-    public int FreightId { get; set; }
     public Freight Freight { get; set; } = null!;
-    public int CustomerId { get; set; }
-    public Customer Customer { get; set; } = null!;
-    public int ProducerId { get; set; }
     public Producer Producer { get; set; } = null!;
-    public int ProductId { get; set; }
     public Product Product { get; set; } = null!;
+    public Customer Customer { get; set; } = null!;
 }
 
 internal sealed class ShipmentConfiguration : IEntityTypeConfiguration<Shipment>
@@ -37,15 +37,6 @@ internal sealed class ShipmentConfiguration : IEntityTypeConfiguration<Shipment>
         builder.Property(shipment => shipment.Id)
             .ValueGeneratedOnAdd();
 
-        builder.OwnsOne(shipment => shipment.Origin);
-        
-        builder.OwnsOne(shipment => shipment.Destination);
-
-        builder.HasOne(shipment => shipment.Customer)
-            .WithMany()
-            .HasForeignKey(shipment => shipment.CustomerId)
-            .OnDelete(DeleteBehavior.Restrict);
-
         builder.HasOne(shipment => shipment.Producer)
             .WithMany()
             .HasForeignKey(shipment => shipment.ProducerId)
@@ -54,6 +45,11 @@ internal sealed class ShipmentConfiguration : IEntityTypeConfiguration<Shipment>
         builder.HasOne(shipment => shipment.Product)
             .WithMany()
             .HasForeignKey(shipment => shipment.ProductId)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasOne(shipment => shipment.Customer)
+            .WithMany()
+            .HasForeignKey(shipment => shipment.CustomerId)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }

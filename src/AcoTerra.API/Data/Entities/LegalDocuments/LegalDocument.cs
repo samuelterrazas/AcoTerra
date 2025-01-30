@@ -7,12 +7,11 @@ namespace AcoTerra.API.Data.Entities.LegalDocuments;
 internal sealed class LegalDocument : AuditableEntity
 {
     public int Id { get; set; }
+    public int? VehicleId { get; set; }
+    public int? ActorId { get; set; }
     public required LegalDocumentType Type { get; set; }
     public required string Document { get; set; }
     public DateOnly? ExpirationDate { get; set; }
-    
-    public int? VehicleId { get; set; }
-    public int? ActorId { get; set; }
 }
 
 internal sealed class LegalDocumentConfiguration : IEntityTypeConfiguration<LegalDocument>

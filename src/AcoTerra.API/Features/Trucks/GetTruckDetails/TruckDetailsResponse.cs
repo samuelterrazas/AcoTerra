@@ -1,4 +1,5 @@
 ﻿using AcoTerra.API.Data.Entities.Trucks;
+using AcoTerra.API.Data.Entities.Vehicles;
 
 namespace AcoTerra.API.Features.Trucks.GetTruckDetails;
 
@@ -10,18 +11,17 @@ internal sealed record TruckDetailsResponse(
     int ManufacturingYear,
     string ChassisNumber,
     string EngineNumber,
-    double CurrentMileage,
-    string FuelType,
-    double AverageConsumption,
-    double TankSize,
-    decimal PurchasePrice,
-    bool Financed,
-    int Installments,
-    decimal OutstandingBalance
+    TechnicalInformationResponse TechnicalInfo,
+    FinancialInformationResponse FinancialInfo,
+    TrailerResponse? Trailer
 )
 {
     public static explicit operator TruckDetailsResponse(Truck truck)
     {
+        TechnicalInformation technicalInfo = truck.TechnicalInformation;
+        FinancialInformation financialInfo = truck.FinancialInformation;
+        Trailer? trailer = truck.Trailer;
+        
         return new TruckDetailsResponse(
             Id: truck.Id,
             LicensePlate: truck.LicensePlate,
@@ -30,14 +30,45 @@ internal sealed record TruckDetailsResponse(
             ManufacturingYear: truck.ManufacturingYear,
             ChassisNumber: truck.ChassisNumber,
             EngineNumber: truck.EngineNumber,
-            CurrentMileage: truck.TechnicalInformation.CurrentMileage,
-            FuelType: Enum.GetName(truck.TechnicalInformation.FuelType)!,
-            AverageConsumption: truck.TechnicalInformation.AverageConsumption,
-            TankSize: truck.TechnicalInformation.TankSize,
-            PurchasePrice: truck.FinancialInformation.PurchasePrice,
-            Financed: truck.FinancialInformation.Financed,
-            Installments: truck.FinancialInformation.Installments,
-            OutstandingBalance: truck.FinancialInformation.OutstandingBalance
+            TechnicalInfo: new TechnicalInformationResponse(
+                CurrentMileage: technicalInfo.CurrentMileage,
+                FuelType: Enum.GetName(technicalInfo.FuelType)!,
+                AverageConsumption: technicalInfo.AverageConsumption,
+                TankSize: technicalInfo.TankSize
+            ),
+            FinancialInfo: new FinancialInformationResponse(
+                PurchasePrice: financialInfo.PurchasePrice,
+                Financed: financialInfo.Financed,
+                Installments: financialInfo.Installments,
+                OutstandingBalance: financialInfo.OutstandingBalance
+            ),
+            Trailer: trailer is not null
+                ? new TrailerResponse(
+                    Id: trailer.Id,
+                    LicensePlate: trailer.LicensePlate,
+                    Capacity: trailer.Capacity
+                )
+                : null
         );
     }
 }
+
+internal sealed record TechnicalInformationResponse(
+    double CurrentMileage,
+    string FuelType,
+    double AverageConsumption,
+    double TankSize
+);
+
+internal sealed record FinancialInformationResponse(
+    decimal PurchasePrice,
+    bool Financed,
+    int Installments,
+    decimal OutstandingBalance
+);
+
+internal sealed record TrailerResponse(
+    int Id,
+    string LicensePlate,
+    double Capacity
+);

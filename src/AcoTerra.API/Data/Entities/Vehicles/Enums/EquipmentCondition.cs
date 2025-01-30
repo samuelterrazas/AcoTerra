@@ -2,7 +2,7 @@
 
 internal enum EquipmentCondition
 {
-    None,
+    Undefined,
     New,
     Good,
     Worn,

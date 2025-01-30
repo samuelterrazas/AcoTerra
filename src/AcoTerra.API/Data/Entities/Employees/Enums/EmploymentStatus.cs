@@ -2,7 +2,7 @@
 
 internal enum EmploymentStatus
 {
-    None,
+    Undefined,
     Active,
     OnLeave,
     Suspended,
