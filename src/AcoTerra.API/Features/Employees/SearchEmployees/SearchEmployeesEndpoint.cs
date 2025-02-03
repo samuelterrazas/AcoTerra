@@ -1,30 +1,31 @@
 ﻿using AcoTerra.API.Common.Abstractions;
 using AcoTerra.API.Data.Entities.Actors.Enums;
-using AcoTerra.API.Data.Entities.Producers;
+using AcoTerra.API.Data.Entities.Employees;
+using AcoTerra.API.Data.Entities.Employees.Enums;
 using Bogus;
 using Bogus.Extensions.UnitedStates;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace AcoTerra.API.Features.Producers.SearchProducers;
+namespace AcoTerra.API.Features.Employees.SearchEmployees;
 
-internal sealed class SearchProducersEndpoint : IEndpoint
+internal sealed class SearchEmployeesEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app) =>
         app.MapGet("/", Handle);
-
-    private static async Task<Ok<List<ProducerResponse>>> Handle(
+    
+    private static async Task<Ok<List<EmployeeResponse>>> Handle(
         IApplicationDbContext dbContext,
         CancellationToken cancellationToken
     )
     {
-        List<ProducerResponse> producers = await dbContext
-            .EntitySetFor<Producer>()
-            .Select(producer => (ProducerResponse)producer)
+        List<EmployeeResponse> employees = await dbContext
+            .EntitySetFor<Employee>()
+            .Select(employee => (EmployeeResponse)employee)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
         
         
-        return TypedResults.Ok(producers);
+        return TypedResults.Ok(employees);
     }
 }

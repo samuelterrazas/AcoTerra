@@ -1,5 +1,4 @@
 ﻿using AcoTerra.API.Common.Abstractions;
-using AcoTerra.API.Data;
 using AcoTerra.API.Data.Entities.Trucks;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +13,11 @@ internal sealed class UpdateTruckEndpoint : IEndpoint
     private static async Task<Results<NoContent, NotFound>> Handle(
         int id,
         UpdateTruckRequest request,
-        ApplicationDbContext dbContext,
+        IApplicationDbContext dbContext,
         CancellationToken cancellationToken
     )
     {
-        Truck? truck = await dbContext.Set<Truck>()
+        Truck? truck = await dbContext.EntitySetFor<Truck>()
             .Include(truck => truck.TechnicalInformation)
             .Include(truck => truck.FinancialInformation)
             .Include(truck => truck.Trailer)
@@ -49,7 +48,7 @@ internal sealed class UpdateTruckEndpoint : IEndpoint
         return TypedResults.NoContent();
     }
 
-    private static void UpdateTechnicalInformation(UpdateTechnicalInformationRequest request, Truck truck)
+    private static void UpdateTechnicalInformation(UpdateTechnicalInformationDto request, Truck truck)
     {
         if (request.CurrentMileage.HasValue)
         {
@@ -72,7 +71,7 @@ internal sealed class UpdateTruckEndpoint : IEndpoint
         }
     }
 
-    private static void UpdateFinancialInformation(UpdateFinancialInformationRequest request, Truck truck)
+    private static void UpdateFinancialInformation(UpdateFinancialInformationDto request, Truck truck)
     {
         if (request.PurchasePrice.HasValue)
         {
@@ -95,7 +94,7 @@ internal sealed class UpdateTruckEndpoint : IEndpoint
         }
     }
 
-    private static void UpdateTrailer(UpdateTrailerRequest request, Truck truck)
+    private static void UpdateTrailer(UpdateTrailerDto request, Truck truck)
     {
         if (truck.Trailer is null)
         {

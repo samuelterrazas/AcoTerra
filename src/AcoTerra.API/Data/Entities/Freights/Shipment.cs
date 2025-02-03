@@ -14,11 +14,12 @@ internal sealed class Shipment : AuditableEntity
     public required string Number { get; set; }
     public required int ProducerId { get; set; }
     public required int ProductId { get; set; }
-    public required double Quantity { get; set; }
-    public required decimal Price { get; set; }
+    public required decimal TotalProductQuantity { get; set; }
+    public required decimal TotalProductWeight { get; set; }
+    public required decimal TotalProductAmount { get; set; }
     public required int CustomerId { get; set; }
     public required string Location { get; set; }
-    public ShipmentStatus Status { get; set; }
+    public required ShipmentStatus Status { get; set; }
     
     public Freight Freight { get; set; } = null!;
     public Producer Producer { get; set; } = null!;

@@ -7,10 +7,10 @@ namespace AcoTerra.API.Data.Entities.Vehicles;
 internal sealed class TechnicalInformation : AuditableEntity
 {
     public int Id { get; set; }
-    public double CurrentMileage { get; set; }
+    public decimal CurrentMileage { get; set; }
     public FuelType FuelType { get; set; }
-    public double AverageConsumption { get; set; }
-    public double TankSize { get; set; }
+    public decimal AverageConsumption { get; set; }
+    public decimal TankSize { get; set; }
 }
 
 internal sealed class TechnicalInformationConfiguration : IEntityTypeConfiguration<TechnicalInformation>

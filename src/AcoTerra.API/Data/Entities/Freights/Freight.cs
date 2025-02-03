@@ -13,9 +13,9 @@ internal sealed class Freight : AuditableEntity
     public required int EmployeeId { get; set; }
     public required DateOnly LoadingDate { get; set; }
     public required DateOnly UnloadingDate { get; set; }
-    public double TotalQuantity { get; set; }
-    public double TotalWeight { get; set; }
-    public decimal TotalFreightCharge { get; set; }
+    public decimal TotalShipmentQuantity { get; set; }
+    public decimal TotalShipmentWeight { get; set; }
+    public decimal TotalShipmentAmount { get; set; }
     public string? Remarks { get; set; }
     
     

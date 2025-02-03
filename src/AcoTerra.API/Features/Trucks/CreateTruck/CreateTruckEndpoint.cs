@@ -1,5 +1,4 @@
 ﻿using AcoTerra.API.Common.Abstractions;
-using AcoTerra.API.Data;
 using AcoTerra.API.Data.Entities.Trucks;
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -12,7 +11,7 @@ internal sealed class CreateTruckEndpoint : IEndpoint
 
     private static async Task<Created<int>> Handle(
         CreateTruckRequest request,
-        ApplicationDbContext dbContext,
+        IApplicationDbContext dbContext,
         CancellationToken cancellationToken
     )
     {
@@ -33,7 +32,7 @@ internal sealed class CreateTruckEndpoint : IEndpoint
                 : null,
         };
 
-        dbContext.Set<Truck>().Add(truck);
+        dbContext.EntitySetFor<Truck>().Add(truck);
 
         await dbContext.SaveChangesAsync(cancellationToken);
 

@@ -1,5 +1,4 @@
 ﻿using AcoTerra.API.Common.Abstractions;
-using AcoTerra.API.Data;
 using AcoTerra.API.Data.Entities.Trucks;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
@@ -12,12 +11,12 @@ internal sealed class SearchTrucksEndpoint : IEndpoint
         .MapGet("/", Handle);
     
     private static async Task<Ok<List<TruckResponse>>> Handle(
-        ApplicationDbContext dbContext,
+        IApplicationDbContext dbContext,
         CancellationToken cancellationToken
     )
     {
         List<TruckResponse> trucks = await dbContext
-            .Set<Truck>()
+            .EntitySetFor<Truck>()
             .AsNoTracking()
             .Select(truck => (TruckResponse)truck)
             .ToListAsync(cancellationToken);

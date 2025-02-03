@@ -1,5 +1,4 @@
 ﻿using AcoTerra.API.Common.Abstractions;
-using AcoTerra.API.Data;
 using AcoTerra.API.Data.Entities.Trucks;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +12,11 @@ internal sealed class DeleteTruckEndpoint : IEndpoint
 
     private static async Task<Results<NoContent, NotFound>> Handle(
         int id,
-        ApplicationDbContext dbContext,
+        IApplicationDbContext dbContext,
         CancellationToken cancellationToken
     )
     {
-        Truck? truck = await dbContext.Set<Truck>()
+        Truck? truck = await dbContext.EntitySetFor<Truck>()
             .Include(truck => truck.TechnicalInformation)
             .Include(truck => truck.FinancialInformation)
             .Include(truck => truck.Trailer)
@@ -28,7 +27,7 @@ internal sealed class DeleteTruckEndpoint : IEndpoint
             return TypedResults.NotFound();
         }
 
-        dbContext.Set<Truck>().Remove(truck);
+        dbContext.EntitySetFor<Truck>().Remove(truck);
 
         await dbContext.SaveChangesAsync(cancellationToken);
 

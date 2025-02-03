@@ -7,10 +7,10 @@ internal sealed record CreateTruckRequest(
     int ManufacturingYear,
     string ChassisNumber,
     string EngineNumber,
-    CreateTrailerRequest? Trailer
+    CreateTrailerDto? Trailer
 );
 
-internal sealed record CreateTrailerRequest(
+internal sealed record CreateTrailerDto(
     string LicensePlate,
-    double Capacity
+    decimal Capacity
 );

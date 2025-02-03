@@ -6,7 +6,7 @@ internal sealed record ProductResponse(
     int Id,
     string Name,
     string PackagingType,
-    double Weight,
+    decimal Weight,
     decimal Price
 )
 {

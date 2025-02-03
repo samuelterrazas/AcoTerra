@@ -3,26 +3,26 @@
 namespace AcoTerra.API.Features.Trucks.UpdateTruck;
 
 internal sealed record UpdateTruckRequest(
-    UpdateTechnicalInformationRequest? TechnicalInfo,
-    UpdateFinancialInformationRequest? FinancialInfo,
-    UpdateTrailerRequest? Trailer
+    UpdateTechnicalInformationDto? TechnicalInfo,
+    UpdateFinancialInformationDto? FinancialInfo,
+    UpdateTrailerDto? Trailer
 );
 
-internal sealed record UpdateTechnicalInformationRequest(
-    double? CurrentMileage,
+internal sealed record UpdateTechnicalInformationDto(
+    decimal? CurrentMileage,
     FuelType? FuelType,
-    double? AverageConsumption,
-    double? TankSize
+    decimal? AverageConsumption,
+    decimal? TankSize
 );
 
-internal sealed record UpdateFinancialInformationRequest(
+internal sealed record UpdateFinancialInformationDto(
     decimal? PurchasePrice,
     bool? Financed,
     int? Installments,
     decimal? OutstandingBalance
 );
 
-internal sealed record UpdateTrailerRequest(
+internal sealed record UpdateTrailerDto(
     string? LicensePlate,
-    double? Capacity
+    decimal? Capacity
 );

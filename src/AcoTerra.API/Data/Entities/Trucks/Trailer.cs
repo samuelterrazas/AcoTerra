@@ -8,7 +8,7 @@ internal sealed class Trailer : AuditableEntity
     public int Id { get; set; }
     public int? TruckId { get; set; }
     public required string LicensePlate { get; set; }
-    public double Capacity { get; set; }
+    public decimal Capacity { get; set; }
 }
 
 internal sealed class TrailerConfiguration : IEntityTypeConfiguration<Trailer>

@@ -1,4 +1,9 @@
 ﻿using AcoTerra.API.Common.Abstractions;
+using AcoTerra.API.Features.Customers.SearchCustomers;
+using AcoTerra.API.Features.Employees.SearchEmployees;
+using AcoTerra.API.Features.Freights.CreateFreight;
+using AcoTerra.API.Features.Freights.CreateShipment;
+using AcoTerra.API.Features.Freights.GetFreightDetails;
 using AcoTerra.API.Features.Producers.SearchProducers;
 using AcoTerra.API.Features.Products.SearchProducts;
 using AcoTerra.API.Features.Trucks.CreateTruck;
@@ -13,9 +18,23 @@ internal static class Endpoints
 {
     internal static void MapEndpoints(this WebApplication app)
     {
+        app.MapFreightEndpoints();
         app.MapTruckEndpoints();
+        app.MapEmployeeEndpoints();
         app.MapProducerEndpoints();
         app.MapProductEndpoints();
+        app.MapCustomerEndpoints();
+    }
+
+    private static void MapFreightEndpoints(this IEndpointRouteBuilder app)
+    {
+        RouteGroupBuilder routeGroup = app.MapGroup("/freights")
+            .WithTags("Freights");
+
+        routeGroup
+            .Map<GetFreightDetailsEndpoint>()
+            .Map<CreateFreightEndpoint>()
+            .Map<CreateShipmentEndpoint>();
     }
 
     private static void MapTruckEndpoints(this IEndpointRouteBuilder app)
@@ -29,6 +48,15 @@ internal static class Endpoints
             .Map<CreateTruckEndpoint>()
             .Map<UpdateTruckEndpoint>()
             .Map<DeleteTruckEndpoint>();
+    }
+    
+    private static void MapEmployeeEndpoints(this IEndpointRouteBuilder app)
+    {
+        RouteGroupBuilder routeGroup = app.MapGroup("/employees")
+            .WithTags("Employees");
+
+        routeGroup
+            .Map<SearchEmployeesEndpoint>();
     }
     
     private static void MapProducerEndpoints(this IEndpointRouteBuilder app)
@@ -47,6 +75,15 @@ internal static class Endpoints
 
         routeGroup
             .Map<SearchProductsEndpoint>();
+    }
+    
+    private static void MapCustomerEndpoints(this IEndpointRouteBuilder app)
+    {
+        RouteGroupBuilder routeGroup = app.MapGroup("/customers")
+            .WithTags("Customers");
+
+        routeGroup
+            .Map<SearchCustomersEndpoint>();
     }
 
     private static IEndpointRouteBuilder Map<TEndpoint>(this IEndpointRouteBuilder app) where TEndpoint : IEndpoint

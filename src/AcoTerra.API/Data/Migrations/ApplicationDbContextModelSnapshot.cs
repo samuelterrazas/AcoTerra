@@ -94,17 +94,17 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("remarks");
 
-                    b.Property<decimal>("TotalFreightCharge")
+                    b.Property<decimal>("TotalShipmentAmount")
                         .HasColumnType("TEXT")
-                        .HasColumnName("total_freight_charge");
+                        .HasColumnName("total_shipment_amount");
 
-                    b.Property<double>("TotalQuantity")
-                        .HasColumnType("REAL")
-                        .HasColumnName("total_quantity");
+                    b.Property<decimal>("TotalShipmentQuantity")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("total_shipment_quantity");
 
-                    b.Property<double>("TotalWeight")
-                        .HasColumnType("REAL")
-                        .HasColumnName("total_weight");
+                    b.Property<decimal>("TotalShipmentWeight")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("total_shipment_weight");
 
                     b.Property<DateOnly>("UnloadingDate")
                         .HasColumnType("TEXT")
@@ -159,10 +159,6 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("number");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("price");
-
                     b.Property<int>("ProducerId")
                         .HasColumnType("INTEGER")
                         .HasColumnName("producer_id");
@@ -171,13 +167,21 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("product_id");
 
-                    b.Property<double>("Quantity")
-                        .HasColumnType("REAL")
-                        .HasColumnName("quantity");
-
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER")
                         .HasColumnName("status");
+
+                    b.Property<decimal>("TotalProductAmount")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("total_product_amount");
+
+                    b.Property<decimal>("TotalProductQuantity")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("total_product_quantity");
+
+                    b.Property<decimal>("TotalProductWeight")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("total_product_weight");
 
                     b.HasKey("Id")
                         .HasName("pk_shipments");
@@ -311,8 +315,8 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("price");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("REAL")
+                    b.Property<decimal>("Weight")
+                        .HasColumnType("TEXT")
                         .HasColumnName("weight");
 
                     b.HasKey("Id")
@@ -328,8 +332,8 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
-                    b.Property<double>("Capacity")
-                        .HasColumnType("REAL")
+                    b.Property<decimal>("Capacity")
+                        .HasColumnType("TEXT")
                         .HasColumnName("capacity");
 
                     b.Property<DateTime>("LastModifiedAt")
@@ -496,12 +500,12 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
-                    b.Property<double>("AverageConsumption")
-                        .HasColumnType("REAL")
+                    b.Property<decimal>("AverageConsumption")
+                        .HasColumnType("TEXT")
                         .HasColumnName("average_consumption");
 
-                    b.Property<double>("CurrentMileage")
-                        .HasColumnType("REAL")
+                    b.Property<decimal>("CurrentMileage")
+                        .HasColumnType("TEXT")
                         .HasColumnName("current_mileage");
 
                     b.Property<int>("FuelType")
@@ -516,8 +520,8 @@ namespace AcoTerra.API.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("last_modified_by");
 
-                    b.Property<double>("TankSize")
-                        .HasColumnType("REAL")
+                    b.Property<decimal>("TankSize")
+                        .HasColumnType("TEXT")
                         .HasColumnName("tank_size");
 
                     b.HasKey("Id")

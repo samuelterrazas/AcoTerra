@@ -155,7 +155,7 @@ namespace AcoTerra.API.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     name = table.Column<string>(type: "TEXT", nullable: false),
                     packaging_type = table.Column<int>(type: "INTEGER", nullable: false),
-                    weight = table.Column<double>(type: "REAL", nullable: false),
+                    weight = table.Column<decimal>(type: "TEXT", nullable: false),
                     price = table.Column<decimal>(type: "TEXT", nullable: false),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
@@ -171,10 +171,10 @@ namespace AcoTerra.API.Data.Migrations
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    current_mileage = table.Column<double>(type: "REAL", nullable: false),
+                    current_mileage = table.Column<decimal>(type: "TEXT", nullable: false),
                     fuel_type = table.Column<int>(type: "INTEGER", nullable: false),
-                    average_consumption = table.Column<double>(type: "REAL", nullable: false),
-                    tank_size = table.Column<double>(type: "REAL", nullable: false),
+                    average_consumption = table.Column<decimal>(type: "TEXT", nullable: false),
+                    tank_size = table.Column<decimal>(type: "TEXT", nullable: false),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -234,9 +234,9 @@ namespace AcoTerra.API.Data.Migrations
                     employee_id = table.Column<int>(type: "INTEGER", nullable: false),
                     loading_date = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     unloading_date = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    total_quantity = table.Column<double>(type: "REAL", nullable: false),
-                    total_weight = table.Column<double>(type: "REAL", nullable: false),
-                    total_freight_charge = table.Column<decimal>(type: "TEXT", nullable: false),
+                    total_shipment_quantity = table.Column<decimal>(type: "TEXT", nullable: false),
+                    total_shipment_weight = table.Column<decimal>(type: "TEXT", nullable: false),
+                    total_shipment_amount = table.Column<decimal>(type: "TEXT", nullable: false),
                     remarks = table.Column<string>(type: "TEXT", nullable: true),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
@@ -260,7 +260,7 @@ namespace AcoTerra.API.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     truck_id = table.Column<int>(type: "INTEGER", nullable: true),
                     license_plate = table.Column<string>(type: "TEXT", nullable: false),
-                    capacity = table.Column<double>(type: "REAL", nullable: false),
+                    capacity = table.Column<decimal>(type: "TEXT", nullable: false),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -285,8 +285,9 @@ namespace AcoTerra.API.Data.Migrations
                     number = table.Column<string>(type: "TEXT", nullable: false),
                     producer_id = table.Column<int>(type: "INTEGER", nullable: false),
                     product_id = table.Column<int>(type: "INTEGER", nullable: false),
-                    quantity = table.Column<double>(type: "REAL", nullable: false),
-                    price = table.Column<decimal>(type: "TEXT", nullable: false),
+                    total_product_quantity = table.Column<decimal>(type: "TEXT", nullable: false),
+                    total_product_weight = table.Column<decimal>(type: "TEXT", nullable: false),
+                    total_product_amount = table.Column<decimal>(type: "TEXT", nullable: false),
                     customer_id = table.Column<int>(type: "INTEGER", nullable: false),
                     location = table.Column<string>(type: "TEXT", nullable: false),
                     status = table.Column<int>(type: "INTEGER", nullable: false),
