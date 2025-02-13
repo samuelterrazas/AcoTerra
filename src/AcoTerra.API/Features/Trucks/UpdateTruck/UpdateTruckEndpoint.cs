@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AcoTerra.API.Features.Trucks.UpdateTruck;
 
-internal sealed class UpdateTruckEndpoint : IEndpoint
+internal sealed class UpdateTruckEndpoint : IEndpoint // TODO
 {
     public static void Map(IEndpointRouteBuilder app) =>
         app.MapPut("/{id:int}", Handle);
@@ -36,11 +36,6 @@ internal sealed class UpdateTruckEndpoint : IEndpoint
         if (request.FinancialInfo is not null)
         {
             UpdateFinancialInformation(request.FinancialInfo, truck);
-        }
-
-        if (request.Trailer is not null)
-        {
-            UpdateTrailer(request.Trailer, truck);
         }
 
         await dbContext.SaveChangesAsync(cancellationToken);
@@ -91,24 +86,6 @@ internal sealed class UpdateTruckEndpoint : IEndpoint
         if (request.OutstandingBalance.HasValue)
         {
             truck.FinancialInformation.OutstandingBalance = request.OutstandingBalance.Value;
-        }
-    }
-
-    private static void UpdateTrailer(UpdateTrailerDto request, Truck truck)
-    {
-        if (truck.Trailer is null)
-        {
-            throw new NullReferenceException();
-        }
-        
-        if (request.LicensePlate is not null)
-        {
-            truck.Trailer.LicensePlate = request.LicensePlate;
-        }
-
-        if (request.Capacity.HasValue)
-        {
-            truck.Trailer.Capacity = request.Capacity.Value;
         }
     }
 }

@@ -9,9 +9,8 @@ internal sealed class MaintenanceHistory : AuditableEntity
     public int Id { get; set; }
     public required int VehicleId { get; set; }
     public required DateOnly Date { get; set; }
-    public required MaintenanceType Type { get; set; }
+    public required string Type { get; set; }
     public required decimal Cost { get; set; }
-    public string? Tires { get; set; }
     public string? Document { get; set; }
 }
 

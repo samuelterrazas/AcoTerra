@@ -19,8 +19,10 @@ internal sealed class GetFreightDetailsEndpoint : IEndpoint
     {
         Freight? freight = await dbContext
             .EntitySetFor<Freight>()
-            .Include(freight => ((Truck)freight.Vehicle).Trailer)
-            .Include(freight => freight.Employee)
+            .Include(freight => freight.Truck)
+            .ThenInclude(truck => truck.Driver)
+            .Include(freight => freight.Truck)
+            .ThenInclude(truck => truck.Trailer)
             .Include(freight => freight.Shipments)
             .ThenInclude(shipment => shipment.Producer)
             .Include(freight => freight.Shipments)

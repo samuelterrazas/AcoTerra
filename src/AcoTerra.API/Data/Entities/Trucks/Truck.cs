@@ -6,6 +6,8 @@ namespace AcoTerra.API.Data.Entities.Trucks;
 
 internal sealed class Truck : Vehicle
 {
+    public int TrailerId { get; set; }
+    
     public Trailer? Trailer { get; set; }
 }
 
@@ -20,7 +22,7 @@ internal sealed class TruckConfiguration : IEntityTypeConfiguration<Truck>
 
         builder.HasOne(truck => truck.Trailer)
             .WithOne()
-            .HasForeignKey<Trailer>(trailer => trailer.TruckId)
-            .OnDelete(DeleteBehavior.SetNull);
+            .HasForeignKey<Truck>(truck => truck.TrailerId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

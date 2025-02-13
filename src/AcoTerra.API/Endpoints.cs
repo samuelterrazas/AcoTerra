@@ -1,6 +1,6 @@
 ﻿using AcoTerra.API.Common.Abstractions;
 using AcoTerra.API.Features.Customers.SearchCustomers;
-using AcoTerra.API.Features.Employees.SearchEmployees;
+using AcoTerra.API.Features.Drivers.SearchDrivers;
 using AcoTerra.API.Features.Freights.CreateFreight;
 using AcoTerra.API.Features.Freights.CreateShipment;
 using AcoTerra.API.Features.Freights.GetFreightDetails;
@@ -20,7 +20,7 @@ internal static class Endpoints
     {
         app.MapFreightEndpoints();
         app.MapTruckEndpoints();
-        app.MapEmployeeEndpoints();
+        app.MapDriverEndpoints();
         app.MapProducerEndpoints();
         app.MapProductEndpoints();
         app.MapCustomerEndpoints();
@@ -50,13 +50,13 @@ internal static class Endpoints
             .Map<DeleteTruckEndpoint>();
     }
     
-    private static void MapEmployeeEndpoints(this IEndpointRouteBuilder app)
+    private static void MapDriverEndpoints(this IEndpointRouteBuilder app)
     {
-        RouteGroupBuilder routeGroup = app.MapGroup("/employees")
-            .WithTags("Employees");
+        RouteGroupBuilder routeGroup = app.MapGroup("/drivers")
+            .WithTags("Drivers");
 
         routeGroup
-            .Map<SearchEmployeesEndpoint>();
+            .Map<SearchDriversEndpoint>();
     }
     
     private static void MapProducerEndpoints(this IEndpointRouteBuilder app)

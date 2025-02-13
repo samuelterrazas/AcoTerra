@@ -26,8 +26,7 @@ internal sealed class CreateFreightEndpoint : IEndpoint
         var freight = new Freight
         {
             Number = lastFreightNumber,
-            VehicleId = request.VehicleId,
-            EmployeeId = request.EmployeeId,
+            TruckId = request.TruckId,
             LoadingDate = request.LoadingDate,
             UnloadingDate = request.UnloadingDate,
             Remarks = request.Remarks,

@@ -1,4 +1,4 @@
-﻿namespace AcoTerra.API.Data.Entities.Employees;
+﻿namespace AcoTerra.API.Data.Entities.Drivers;
 
 // TODO
 internal sealed record EmergencyContact(

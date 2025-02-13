@@ -1,4 +1,4 @@
-﻿namespace AcoTerra.API.Data.Entities.Vehicles.Enums;
+﻿namespace AcoTerra.API.Data.Entities.LegalDocuments.Enums;
 
 internal enum LegalDocumentType
 {

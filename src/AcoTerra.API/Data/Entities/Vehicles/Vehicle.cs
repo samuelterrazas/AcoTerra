@@ -1,4 +1,5 @@
-﻿using AcoTerra.API.Data.Entities.LegalDocuments;
+﻿using AcoTerra.API.Data.Entities.Drivers;
+using AcoTerra.API.Data.Entities.LegalDocuments;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,6 +14,7 @@ internal abstract class Vehicle : AuditableEntity
     public required int ManufacturingYear { get; set; }
     public required string ChassisNumber { get; set; }
     public required string EngineNumber { get; set; }
+    public int? DriverId { get; set; }
 
     public TechnicalInformation TechnicalInformation { get; set; } = new();
     public FinancialInformation FinancialInformation { get; set; } = new();
@@ -20,6 +22,7 @@ internal abstract class Vehicle : AuditableEntity
     public ICollection<MaintenanceHistory> MaintenanceHistory { get; set; } = [];
     public ICollection<TrafficFine> TrafficFines { get; set; } = [];
     public ICollection<AdditionalEquipment> AdditionalEquipment { get; set; } = [];
+    public Driver? Driver { get; set; }
 }
 
 internal sealed class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
@@ -59,5 +62,10 @@ internal sealed class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
             .WithOne()
             .HasForeignKey(equipment => equipment.VehicleId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(vehicle => vehicle.Driver)
+            .WithMany()
+            .HasForeignKey(vehicle => vehicle.DriverId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

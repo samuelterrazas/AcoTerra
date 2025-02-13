@@ -1,4 +1,4 @@
-﻿using AcoTerra.API.Data.Entities.Employees;
+﻿using AcoTerra.API.Data.Entities.Trucks;
 using AcoTerra.API.Data.Entities.Vehicles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -9,8 +9,7 @@ internal sealed class Freight : AuditableEntity
 {
     public int Id { get; set; }
     public required string Number { get; set; }
-    public required int VehicleId { get; set; }
-    public required int EmployeeId { get; set; }
+    public required int TruckId { get; set; }
     public required DateOnly LoadingDate { get; set; }
     public required DateOnly UnloadingDate { get; set; }
     public decimal TotalShipmentQuantity { get; set; }
@@ -19,8 +18,7 @@ internal sealed class Freight : AuditableEntity
     public string? Remarks { get; set; }
     
     
-    public Vehicle Vehicle { get; set; } = null!;
-    public Employee Employee { get; set; } = null!;
+    public Truck Truck { get; set; } = null!;
     public ICollection<Shipment> Shipments { get; set; } = [];
 }
 
@@ -35,15 +33,10 @@ internal sealed class FreightConfiguration : IEntityTypeConfiguration<Freight>
         builder.Property(freight => freight.Id)
             .ValueGeneratedOnAdd();
 
-        builder.HasOne(freight => freight.Vehicle)
+        builder.HasOne(freight => freight.Truck)
             .WithMany()
-            .HasForeignKey(freight => freight.VehicleId)
-            .OnDelete(DeleteBehavior.Restrict);
-        
-        builder.HasOne(freight => freight.Employee)
-            .WithMany()
-            .HasForeignKey(freight => freight.EmployeeId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .HasForeignKey(freight => freight.TruckId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasMany(freight => freight.Shipments)
             .WithOne(shipment => shipment.Freight)

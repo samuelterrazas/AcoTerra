@@ -1,7 +1,7 @@
 ﻿using AcoTerra.API.Data.Entities.Actors.Enums;
 using AcoTerra.API.Data.Entities.Customers;
-using AcoTerra.API.Data.Entities.Employees;
-using AcoTerra.API.Data.Entities.Employees.Enums;
+using AcoTerra.API.Data.Entities.Drivers;
+using AcoTerra.API.Data.Entities.Drivers.Enums;
 using AcoTerra.API.Data.Entities.Producers;
 using AcoTerra.API.Data.Entities.Products;
 using AcoTerra.API.Data.Entities.Products.Enums;
@@ -36,15 +36,15 @@ internal sealed class DatabaseInitializer(
 
         try
         {
-            #region Employees
+            #region Drivers
 
-            var employees = new List<Employee>();
+            var drivers = new List<Driver>();
 
             for (int i = 0; i < 10; i++)
             {
                 var faker = new Faker("es");
 
-                var employee = new Employee
+                var driver = new Driver
                 {
                     Id = i + 1,
                     Name = faker.Person.FullName,
@@ -56,10 +56,10 @@ internal sealed class DatabaseInitializer(
                     DateOfBirth = DateOnly.FromDateTime(faker.Person.DateOfBirth),
                 };
             
-                employees.Add(employee);
+                drivers.Add(driver);
             }
             
-            dbContext.Set<Employee>().AddRange(employees);
+            dbContext.Set<Driver>().AddRange(drivers);
 
             #endregion
             

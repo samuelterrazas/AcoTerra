@@ -1,4 +1,4 @@
-﻿namespace AcoTerra.API.Data.Entities.Employees.Enums;
+﻿namespace AcoTerra.API.Data.Entities.Drivers.Enums;
 
 internal enum EmploymentStatus
 {

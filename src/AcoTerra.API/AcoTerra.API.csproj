@@ -20,8 +20,4 @@
 		<PackageReference Include="Swashbuckle.AspNetCore" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Data\Migrations\" />
-	</ItemGroup>
-
 </Project>

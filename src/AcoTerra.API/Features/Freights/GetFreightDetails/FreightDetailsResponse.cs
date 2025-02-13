@@ -1,4 +1,4 @@
-﻿using AcoTerra.API.Data.Entities.Employees;
+﻿using AcoTerra.API.Data.Entities.Drivers;
 using AcoTerra.API.Data.Entities.Freights;
 using AcoTerra.API.Data.Entities.Trucks;
 using AcoTerra.API.Features.Common.DTOs;
@@ -9,7 +9,6 @@ internal sealed record FreightDetailsResponse(
     int Id,
     string Number,
     TruckDto Truck,
-    EmployeeDto Employee,
     DateOnly LoadingDate,
     DateOnly UnloadingDate,
     decimal TotalShipmentQuantity,
@@ -24,8 +23,7 @@ internal sealed record FreightDetailsResponse(
         return new FreightDetailsResponse(
             Id: freight.Id,
             Number: freight.Number,
-            Truck: (TruckDto)freight.Vehicle,
-            Employee: (EmployeeDto)freight.Employee,
+            Truck: (TruckDto)freight.Truck,
             LoadingDate: freight.LoadingDate,
             UnloadingDate: freight.UnloadingDate,
             TotalShipmentQuantity: freight.TotalShipmentQuantity,
@@ -44,11 +42,17 @@ internal sealed record TruckDto(
     string LicensePlate,
     string Brand,
     string Model,
+    DriverDto Driver,
     TrailerDto Trailer
 )
 {
     public static explicit operator TruckDto(Truck truck)
     {
+        if (truck.Driver is null)
+        {
+            throw new InvalidOperationException($"The '{nameof(truck.Driver)}' entity has not been initialized.");
+        }
+        
         if (truck.Trailer is null)
         {
             throw new InvalidOperationException($"The '{nameof(truck.Trailer)}' entity has not been initialized.");
@@ -59,25 +63,26 @@ internal sealed record TruckDto(
             LicensePlate: truck.LicensePlate,
             Brand: truck.Brand,
             Model: truck.Model,
+            Driver: (DriverDto)truck.Driver,
             Trailer: (TrailerDto)truck.Trailer
         );
     }
 }
 
-internal sealed record EmployeeDto(
+internal sealed record DriverDto(
     int Id,
     string Name,
     string IdentificationNumber,
     string PhoneNumber
 )
 {
-    public static explicit operator EmployeeDto(Employee employee)
+    public static explicit operator DriverDto(Driver driver)
     {
-        return new EmployeeDto(
-            Id: employee.Id,
-            Name: employee.Name,
-            IdentificationNumber: employee.IdentificationNumber,
-            PhoneNumber: employee.PhoneNumber
+        return new DriverDto(
+            Id: driver.Id,
+            Name: driver.Name,
+            IdentificationNumber: driver.IdentificationNumber,
+            PhoneNumber: driver.PhoneNumber
         );
     }
 }

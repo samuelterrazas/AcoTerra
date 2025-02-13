@@ -4,8 +4,7 @@ namespace AcoTerra.API.Features.Trucks.UpdateTruck;
 
 internal sealed record UpdateTruckRequest(
     UpdateTechnicalInformationDto? TechnicalInfo,
-    UpdateFinancialInformationDto? FinancialInfo,
-    UpdateTrailerDto? Trailer
+    UpdateFinancialInformationDto? FinancialInfo
 );
 
 internal sealed record UpdateTechnicalInformationDto(
@@ -20,9 +19,4 @@ internal sealed record UpdateFinancialInformationDto(
     bool? Financed,
     int? Installments,
     decimal? OutstandingBalance
-);
-
-internal sealed record UpdateTrailerDto(
-    string? LicensePlate,
-    decimal? Capacity
 );

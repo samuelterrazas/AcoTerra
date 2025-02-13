@@ -41,16 +41,16 @@ internal sealed class ShipmentConfiguration : IEntityTypeConfiguration<Shipment>
         builder.HasOne(shipment => shipment.Producer)
             .WithMany()
             .HasForeignKey(shipment => shipment.ProducerId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasOne(shipment => shipment.Product)
             .WithMany()
             .HasForeignKey(shipment => shipment.ProductId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.NoAction);
         
         builder.HasOne(shipment => shipment.Customer)
             .WithMany()
             .HasForeignKey(shipment => shipment.CustomerId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }
