@@ -402,3 +402,6 @@ FodyWeavers.xsd
 
 # Docker containers
 .containers
+
+# MVC
+/src/AcoTerra.Web/wwwroot/lib
