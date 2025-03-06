@@ -1,4 +1,5 @@
 ﻿using AcoTerra.API.Common.Abstractions;
+using AcoTerra.API.Data.Entities.Drivers;
 using AcoTerra.API.Data.Entities.Trucks;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,16 @@ internal sealed class CreateTruckEndpoint : IEndpoint
             {
                 LicensePlate = request.Trailer.LicensePlate,
                 Capacity = request.Trailer.Capacity,
+            },
+            Driver = new Driver
+            {
+                Name = request.Driver.Name,
+                IdentificationType = request.Driver.IdentificationType,
+                IdentificationNumber = request.Driver.IdentificationNumber,
+                PhoneNumber = request.Driver.PhoneNumber,
+                Email = request.Driver.Email,
+                EmploymentStatus = request.Driver.EmploymentStatus,
+                DateOfBirth = request.Driver.DateOfBirth,
             },
         };
 

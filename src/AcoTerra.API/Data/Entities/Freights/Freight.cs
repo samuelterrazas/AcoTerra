@@ -1,5 +1,4 @@
 ﻿using AcoTerra.API.Data.Entities.Trucks;
-using AcoTerra.API.Data.Entities.Vehicles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

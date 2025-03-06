@@ -1,8 +1,5 @@
 ﻿using AcoTerra.API.Common.Abstractions;
-using AcoTerra.API.Data.Entities.Actors.Enums;
 using AcoTerra.API.Data.Entities.Producers;
-using Bogus;
-using Bogus.Extensions.UnitedStates;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 

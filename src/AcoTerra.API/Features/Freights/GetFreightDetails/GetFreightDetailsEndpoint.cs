@@ -1,6 +1,5 @@
 ﻿using AcoTerra.API.Common.Abstractions;
 using AcoTerra.API.Data.Entities.Freights;
-using AcoTerra.API.Data.Entities.Trucks;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 

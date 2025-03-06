@@ -1,5 +1,4 @@
 ﻿using AcoTerra.API.Data.Entities.LegalDocuments.Enums;
-using AcoTerra.API.Data.Entities.Vehicles.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

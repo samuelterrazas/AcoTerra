@@ -1,5 +1,4 @@
-﻿using AcoTerra.API.Data.Entities.Vehicles.Enums;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AcoTerra.API.Data.Entities.Vehicles;

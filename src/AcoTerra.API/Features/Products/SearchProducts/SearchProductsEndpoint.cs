@@ -1,6 +1,5 @@
 ﻿using AcoTerra.API.Common.Abstractions;
 using AcoTerra.API.Data.Entities.Products;
-using Bogus;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 

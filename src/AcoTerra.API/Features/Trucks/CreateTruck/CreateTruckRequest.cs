@@ -1,4 +1,7 @@
-﻿namespace AcoTerra.API.Features.Trucks.CreateTruck;
+﻿using AcoTerra.API.Data.Entities.Actors.Enums;
+using AcoTerra.API.Data.Entities.Drivers.Enums;
+
+namespace AcoTerra.API.Features.Trucks.CreateTruck;
 
 internal sealed record CreateTruckRequest(
     string LicensePlate,
@@ -7,10 +10,21 @@ internal sealed record CreateTruckRequest(
     int ManufacturingYear,
     string ChassisNumber,
     string EngineNumber,
-    CreateTrailerDto Trailer
+    CreateTrailerDto Trailer,
+    CreateDriverDto Driver
 );
 
 internal sealed record CreateTrailerDto(
     string LicensePlate,
     decimal Capacity
+);
+
+internal sealed record CreateDriverDto(
+    string Name,
+    IdentificationType IdentificationType,
+    string IdentificationNumber,
+    string PhoneNumber,
+    string Email,
+    EmploymentStatus EmploymentStatus,
+    DateOnly DateOfBirth
 );
