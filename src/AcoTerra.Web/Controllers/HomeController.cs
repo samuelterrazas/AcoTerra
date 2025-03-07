@@ -4,15 +4,8 @@ using AcoTerra.Web.Models;
 
 namespace AcoTerra.Web.Controllers;
 
-public class HomeController : Controller
+public sealed class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
-
     public IActionResult Index()
     {
         return View();

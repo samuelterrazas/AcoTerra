@@ -2,7 +2,7 @@
 
 namespace AcoTerra.Core.Features.Drivers.SearchDrivers;
 
-internal sealed record DriverResponse(
+public sealed record DriverResponse(
     int Id,
     string Name,
     string IdentificationType,

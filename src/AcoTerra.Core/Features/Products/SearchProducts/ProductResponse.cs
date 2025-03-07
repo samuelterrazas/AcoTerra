@@ -2,7 +2,7 @@
 
 namespace AcoTerra.Core.Features.Products.SearchProducts;
 
-internal sealed record ProductResponse(
+public sealed record ProductResponse(
     int Id,
     string Name,
     string PackagingType,

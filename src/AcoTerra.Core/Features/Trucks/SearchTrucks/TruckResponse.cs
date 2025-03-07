@@ -2,7 +2,7 @@
 
 namespace AcoTerra.Core.Features.Trucks.SearchTrucks;
 
-internal sealed record TruckResponse(
+public sealed record TruckResponse(
     int Id,
     string LicensePlate,
     string Brand,

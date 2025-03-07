@@ -2,7 +2,7 @@
 
 namespace AcoTerra.Core.Features.Producers.SearchProducers;
 
-internal sealed record ProducerResponse(
+public sealed record ProducerResponse(
     int Id,
     string Name,
     string IdentificationType,
