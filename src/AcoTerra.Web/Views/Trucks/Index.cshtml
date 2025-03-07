@@ -1,0 +1,35 @@
+﻿@model List<TruckResponse>
+
+@{
+    ViewData["Title"] = "Camiones";
+}
+
+<h1>Camiones</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Patente</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Año de fabricación</th>
+            <th scope="col">Número de chasis</th>
+            <th scope="col">Número de motor</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (TruckResponse truck in Model) {
+            <tr>
+                <th scope="row">@truck.Id</th>
+                <td>@truck.LicensePlate</td>
+                <td>@truck.Brand</td>
+                <td>@truck.Model</td>
+                <td>@truck.ManufacturingYear</td>
+                <td>@truck.ChassisNumber</td>
+                <td>@truck.EngineNumber</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

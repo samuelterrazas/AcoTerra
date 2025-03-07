@@ -17,7 +17,6 @@ internal sealed class DeleteTruckCommandHandler(
         Truck? truck = await dbContext.EntitySetFor<Truck>()
             .Include(truck => truck.TechnicalInformation)
             .Include(truck => truck.FinancialInformation)
-            .Include(truck => truck.Trailer)
             .FirstOrDefaultAsync(truck => truck.Id == request.Id, cancellationToken);
 
         if (truck is null)

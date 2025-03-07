@@ -24,7 +24,7 @@ WebApplication app = builder.Build();
         var initializer = scope.ServiceProvider.GetRequiredService<DatabaseInitializer>();
 
         await initializer.InitializeAsync();
-        //await initializer.SeedAsync();
+        // await initializer.SeedAsync();
     }
 
     app.UseHttpsRedirection();
