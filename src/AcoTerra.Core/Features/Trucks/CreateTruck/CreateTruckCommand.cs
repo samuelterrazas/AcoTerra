@@ -1,19 +1,37 @@
 ﻿using AcoTerra.Core.Common.Abstractions;
 using AcoTerra.Core.Common.Abstractions.Messaging;
 using AcoTerra.Core.Entities.Trucks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AcoTerra.Core.Features.Trucks.CreateTruck;
 
-public sealed record CreateTruckCommand(
-    string LicensePlate,
-    string Brand,
-    string Model,
-    int ManufacturingYear,
-    string ChassisNumber,
-    string EngineNumber,
-    int DriverId,
-    int TrailerId
-) : ICommand;
+// public sealed record CreateTruckCommand(
+//     string LicensePlate,
+//     string Brand,
+//     string Model,
+//     int ManufacturingYear,
+//     string ChassisNumber,
+//     string EngineNumber,
+//     int DriverId,
+//     List<SelectListItem> Drivers,
+//     int TrailerId,
+//     List<SelectListItem> Trailers
+// ) : ICommand;
+
+//TODO Clase
+public sealed class CreateTruckCommand : ICommand
+{
+    public string LicensePlate { get; set; } = string.Empty;
+    public string Brand { get; set; } = string.Empty;
+    public string Model { get; set; } = string.Empty;
+    public int ManufacturingYear { get; set; }
+    public string ChassisNumber { get; set; } = string.Empty;
+    public string EngineNumber { get; set; } = string.Empty;
+    public int DriverId { get; set; }
+    public List<SelectListItem> Drivers { get; set; } = new();
+    public int TrailerId { get; set; }
+    public List<SelectListItem> Trailers { get; set; } = new();
+}
 
 
 internal sealed class CreateTruckCommandHandler(
