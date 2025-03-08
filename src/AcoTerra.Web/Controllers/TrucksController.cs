@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using AcoTerra.Core.Features.Trucks.SearchTrucks;
+﻿using AcoTerra.Core.Features.Trucks.SearchTrucks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

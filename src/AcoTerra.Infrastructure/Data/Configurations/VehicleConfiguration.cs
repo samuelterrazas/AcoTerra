@@ -1,4 +1,6 @@
-﻿using AcoTerra.Core.Entities.Vehicles;
+﻿using AcoTerra.Core.Entities.Trucks;
+using AcoTerra.Core.Entities.Vehicles;
+using AcoTerra.Core.Entities.Vehicles.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,7 +10,10 @@ internal sealed class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
 {
     public void Configure(EntityTypeBuilder<Vehicle> builder)
     {
-        builder.UseTpcMappingStrategy();
+        builder.ToTable("vehicles")
+            .UseTphMappingStrategy()
+            .HasDiscriminator<VehicleType>("Type")
+            .HasValue<Truck>(VehicleType.Truck);
 
         builder.HasKey(vehicle => vehicle.Id);
 

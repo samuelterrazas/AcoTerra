@@ -1,4 +1,5 @@
-﻿using AcoTerra.Core.Entities.Actors.Enums;
+﻿using AcoTerra.Core.Entities.Agents;
+using AcoTerra.Core.Entities.Agents.Enums;
 using AcoTerra.Core.Entities.Customers;
 using AcoTerra.Core.Entities.Drivers;
 using AcoTerra.Core.Entities.Drivers.Enums;
@@ -6,6 +7,7 @@ using AcoTerra.Core.Entities.Producers;
 using AcoTerra.Core.Entities.Products;
 using AcoTerra.Core.Entities.Products.Enums;
 using AcoTerra.Core.Entities.Trucks;
+using AcoTerra.Core.Entities.Vehicles;
 using Bogus;
 using Bogus.Extensions.UnitedStates;
 using Microsoft.EntityFrameworkCore;
@@ -38,105 +40,56 @@ public sealed class DatabaseInitializer(
 
         try
         {
-            #region Producers
+            #region Agents
 
-            var producers = new List<Producer>();
+            var agents = new List<Agent>();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 1; i <= 30; i++)
             {
                 var faker = new Faker("es");
 
-                var producer = new Producer
+                Agent agent = i switch
                 {
-                    Id = i + 1,
-                    Name = faker.Person.FullName,
-                    IdentificationType = IdentificationType.DNI,
-                    IdentificationNumber = faker.Person.Ssn(),
-                    PhoneNumber = faker.Person.Phone,
-                    Email = faker.Person.Email,
+                    > 0 and <= 10 =>
+                        new Driver
+                        {
+                            Id = i,
+                            Name = faker.Person.FullName,
+                            IdentificationType = IdentificationType.DNI,
+                            IdentificationNumber = faker.Person.Ssn(),
+                            PhoneNumber = faker.Person.Phone,
+                            Email = faker.Person.Email,
+                            EmploymentStatus = EmploymentStatus.Active,
+                            DateOfBirth = DateOnly.FromDateTime(faker.Person.DateOfBirth),
+                        },
+                    > 10 and <= 20 =>
+                        new Producer
+                        {
+                            Id = i,
+                            Name = faker.Person.FullName,
+                            IdentificationType = IdentificationType.DNI,
+                            IdentificationNumber = faker.Person.Ssn(),
+                            PhoneNumber = faker.Person.Phone,
+                            Email = faker.Person.Email,
+                        },
+                    > 20 and <= 30 =>
+                        new Customer
+                        {
+                            Id = i,
+                            Name = faker.Person.FullName,
+                            IdentificationType = IdentificationType.DNI,
+                            IdentificationNumber = faker.Person.Ssn(),
+                            PhoneNumber = faker.Person.Phone,
+                            Email = faker.Person.Email,
+                        },
+                    _ => throw new ArgumentOutOfRangeException(nameof(i)),
                 };
-
-                producers.Add(producer);
+                
+                agents.Add(agent);
             }
             
-            dbContext.Set<Producer>().AddRange(producers);
-
-            #endregion
+            dbContext.Set<Agent>().AddRange(agents);
             
-            #region Products
-
-            var products = new List<Product>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                var faker = new Faker("es");
-
-                var product = new Product
-                {
-                    Id = i + 100,
-                    Name = faker.Commerce.Product(),
-                    PackagingType = PackagingType.Pallet,
-                    Weight = decimal.Round(faker.Random.Decimal(min: 10, max: 1500)),
-                    Price = decimal.Parse(faker.Commerce.Price()),
-                };
-
-                products.Add(product);
-            }
-
-            dbContext.Set<Product>().AddRange(products);
-
-            #endregion
-
-            #region Customers
-
-            var customers = new List<Customer>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                var faker = new Faker("es");
-
-                var customer = new Customer
-                {
-                    Id = i + 1_000,
-                    Name = faker.Person.FullName,
-                    IdentificationType = IdentificationType.DNI,
-                    IdentificationNumber = faker.Person.Ssn(),
-                    PhoneNumber = faker.Person.Phone,
-                    Email = faker.Person.Email,
-                };
-            
-                customers.Add(customer);
-            }
-            
-            dbContext.Set<Customer>().AddRange(customers);
-
-            #endregion
-            
-            #region Drivers
-
-            var drivers = new List<Driver>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                var faker = new Faker("es");
-
-                var driver = new Driver
-                {
-                    Id = i + 10_000,
-                    Name = faker.Person.FullName,
-                    IdentificationType = IdentificationType.DNI,
-                    IdentificationNumber = faker.Person.Ssn(),
-                    PhoneNumber = faker.Person.Phone,
-                    Email = faker.Person.Email,
-                    EmploymentStatus = EmploymentStatus.Active,
-                    DateOfBirth = DateOnly.FromDateTime(faker.Person.DateOfBirth),
-                };
-            
-                drivers.Add(driver);
-            }
-            
-            dbContext.Set<Driver>().AddRange(drivers);
-
             #endregion
 
             #region Trailers
@@ -174,7 +127,7 @@ public sealed class DatabaseInitializer(
                     ManufacturingYear = 2020,
                     ChassisNumber = "8APZZZ12345678901",
                     EngineNumber = "MBOM471198A123456",
-                    DriverId = 10_001,
+                    DriverId = 1,
                     TrailerId = 1,
                 },
                 new()
@@ -186,13 +139,37 @@ public sealed class DatabaseInitializer(
                     ManufacturingYear = 2021,
                     ChassisNumber = "9BSZZZ12345678902",
                     EngineNumber = "SCANIA12345AB6789",
-                    DriverId = 10_002,
+                    DriverId = 2,
                     TrailerId = 2,
                 },
             };
             
-            dbContext.Set<Truck>().AddRange(trucks);
+            dbContext.Set<Vehicle>().AddRange(trucks);
             
+            #endregion
+            
+            #region Products
+
+            var products = new List<Product>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                var faker = new Faker("es");
+
+                var product = new Product
+                {
+                    Id = i + 100,
+                    Name = faker.Commerce.Product(),
+                    PackagingType = PackagingType.Pallet,
+                    Weight = decimal.Round(faker.Random.Decimal(min: 10, max: 1500)),
+                    Price = decimal.Parse(faker.Commerce.Price()),
+                };
+
+                products.Add(product);
+            }
+
+            dbContext.Set<Product>().AddRange(products);
+
             #endregion
 
             await dbContext.SaveChangesAsync();

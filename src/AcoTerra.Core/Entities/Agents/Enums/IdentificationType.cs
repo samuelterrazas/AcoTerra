@@ -1,4 +1,4 @@
-﻿namespace AcoTerra.Core.Entities.Actors.Enums;
+﻿namespace AcoTerra.Core.Entities.Agents.Enums;
 
 public enum IdentificationType
 {

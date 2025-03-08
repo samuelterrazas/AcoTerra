@@ -1,5 +1,5 @@
 ﻿using AcoTerra.Core.Common.Abstractions.Messaging;
-using AcoTerra.Core.Entities.Actors.Enums;
+using AcoTerra.Core.Entities.Agents.Enums;
 using AcoTerra.Core.Entities.Drivers.Enums;
 
 namespace AcoTerra.Core.Features.Drivers.CreateDriver;

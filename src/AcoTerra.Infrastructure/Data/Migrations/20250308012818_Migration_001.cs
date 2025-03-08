@@ -12,26 +12,7 @@ namespace AcoTerra.Infrastructure.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "additional_equipment",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    vehicle_id = table.Column<int>(type: "INTEGER", nullable: false),
-                    name = table.Column<string>(type: "TEXT", nullable: false),
-                    description = table.Column<string>(type: "TEXT", nullable: true),
-                    cost = table.Column<decimal>(type: "TEXT", nullable: false),
-                    condition = table.Column<int>(type: "INTEGER", nullable: false),
-                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_additional_equipment", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "customers",
+                name: "agents",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -41,109 +22,16 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                     identification_number = table.Column<string>(type: "TEXT", nullable: false),
                     phone_number = table.Column<string>(type: "TEXT", nullable: false),
                     email = table.Column<string>(type: "TEXT", nullable: true),
-                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_customers", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "drivers",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    name = table.Column<string>(type: "TEXT", nullable: false),
-                    identification_type = table.Column<int>(type: "INTEGER", nullable: false),
-                    identification_number = table.Column<string>(type: "TEXT", nullable: false),
-                    phone_number = table.Column<string>(type: "TEXT", nullable: false),
-                    email = table.Column<string>(type: "TEXT", nullable: true),
-                    employment_status = table.Column<int>(type: "INTEGER", nullable: false),
-                    date_of_birth = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    type = table.Column<int>(type: "INTEGER", nullable: false),
+                    employment_status = table.Column<int>(type: "INTEGER", nullable: true),
+                    date_of_birth = table.Column<DateOnly>(type: "TEXT", nullable: true),
                     emergency_contact = table.Column<string>(type: "TEXT", nullable: true),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_drivers", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "financial_information",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    purchase_price = table.Column<decimal>(type: "TEXT", nullable: false),
-                    financed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    installments = table.Column<int>(type: "INTEGER", nullable: false),
-                    outstanding_balance = table.Column<decimal>(type: "TEXT", nullable: false),
-                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_financial_information", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "legal_documents",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    vehicle_id = table.Column<int>(type: "INTEGER", nullable: true),
-                    actor_id = table.Column<int>(type: "INTEGER", nullable: true),
-                    type = table.Column<int>(type: "INTEGER", nullable: false),
-                    document = table.Column<string>(type: "TEXT", nullable: false),
-                    expiration_date = table.Column<DateOnly>(type: "TEXT", nullable: true),
-                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_legal_documents", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "maintenance_history",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    vehicle_id = table.Column<int>(type: "INTEGER", nullable: false),
-                    date = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    type = table.Column<string>(type: "TEXT", nullable: false),
-                    cost = table.Column<decimal>(type: "TEXT", nullable: false),
-                    document = table.Column<string>(type: "TEXT", nullable: true),
-                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_maintenance_history", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "producers",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    name = table.Column<string>(type: "TEXT", nullable: false),
-                    identification_type = table.Column<int>(type: "INTEGER", nullable: false),
-                    identification_number = table.Column<string>(type: "TEXT", nullable: false),
-                    phone_number = table.Column<string>(type: "TEXT", nullable: false),
-                    email = table.Column<string>(type: "TEXT", nullable: true),
-                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_producers", x => x.id);
+                    table.PrimaryKey("pk_agents", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -165,44 +53,6 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "technical_information",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    current_mileage = table.Column<decimal>(type: "TEXT", nullable: false),
-                    fuel_type = table.Column<int>(type: "INTEGER", nullable: false),
-                    average_consumption = table.Column<decimal>(type: "TEXT", nullable: false),
-                    tank_size = table.Column<decimal>(type: "TEXT", nullable: false),
-                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_technical_information", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "traffic_fines",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    vehicle_id = table.Column<int>(type: "INTEGER", nullable: false),
-                    violation = table.Column<string>(type: "TEXT", nullable: false),
-                    amount = table.Column<decimal>(type: "TEXT", nullable: false),
-                    date_issued = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    paid_at = table.Column<DateOnly>(type: "TEXT", nullable: true),
-                    document = table.Column<string>(type: "TEXT", nullable: true),
-                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_traffic_fines", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "trailers",
                 columns: table => new
                 {
@@ -219,7 +69,7 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "trucks",
+                name: "vehicles",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -231,23 +81,73 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                     chassis_number = table.Column<string>(type: "TEXT", nullable: false),
                     engine_number = table.Column<string>(type: "TEXT", nullable: false),
                     driver_id = table.Column<int>(type: "INTEGER", nullable: true),
-                    trailer_id = table.Column<int>(type: "INTEGER", nullable: false),
+                    type = table.Column<int>(type: "INTEGER", nullable: false),
+                    trailer_id = table.Column<int>(type: "INTEGER", nullable: true),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_trucks", x => x.id);
+                    table.PrimaryKey("pk_vehicles", x => x.id);
                     table.ForeignKey(
-                        name: "FK_trucks_drivers_driver_id",
+                        name: "fk_vehicles_agents_driver_id",
                         column: x => x.driver_id,
-                        principalTable: "drivers",
+                        principalTable: "agents",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_trucks_trailers_trailer_id",
+                        name: "fk_vehicles_trailers_trailer_id",
                         column: x => x.trailer_id,
                         principalTable: "trailers",
                         principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "additional_equipment",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    vehicle_id = table.Column<int>(type: "INTEGER", nullable: false),
+                    name = table.Column<string>(type: "TEXT", nullable: false),
+                    description = table.Column<string>(type: "TEXT", nullable: true),
+                    cost = table.Column<decimal>(type: "TEXT", nullable: false),
+                    condition = table.Column<int>(type: "INTEGER", nullable: false),
+                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_additional_equipment", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_additional_equipment_vehicle_vehicle_id",
+                        column: x => x.vehicle_id,
+                        principalTable: "vehicles",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "financial_information",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    purchase_price = table.Column<decimal>(type: "TEXT", nullable: false),
+                    financed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    installments = table.Column<int>(type: "INTEGER", nullable: false),
+                    outstanding_balance = table.Column<decimal>(type: "TEXT", nullable: false),
+                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_financial_information", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_financial_information_vehicles_id",
+                        column: x => x.id,
+                        principalTable: "vehicles",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -271,10 +171,116 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                 {
                     table.PrimaryKey("pk_freight", x => x.id);
                     table.ForeignKey(
-                        name: "fk_freight_trucks_truck_id",
+                        name: "fk_freight_vehicle_truck_id",
                         column: x => x.truck_id,
-                        principalTable: "trucks",
+                        principalTable: "vehicles",
                         principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legal_documents",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    vehicle_id = table.Column<int>(type: "INTEGER", nullable: true),
+                    agent_id = table.Column<int>(type: "INTEGER", nullable: true),
+                    type = table.Column<int>(type: "INTEGER", nullable: false),
+                    document = table.Column<string>(type: "TEXT", nullable: false),
+                    expiration_date = table.Column<DateOnly>(type: "TEXT", nullable: true),
+                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legal_documents", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_legal_documents_agents_agent_id",
+                        column: x => x.agent_id,
+                        principalTable: "agents",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_legal_documents_vehicle_vehicle_id",
+                        column: x => x.vehicle_id,
+                        principalTable: "vehicles",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "maintenance_history",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    vehicle_id = table.Column<int>(type: "INTEGER", nullable: false),
+                    date = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    type = table.Column<string>(type: "TEXT", nullable: false),
+                    cost = table.Column<decimal>(type: "TEXT", nullable: false),
+                    document = table.Column<string>(type: "TEXT", nullable: true),
+                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_maintenance_history", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_maintenance_history_vehicle_vehicle_id",
+                        column: x => x.vehicle_id,
+                        principalTable: "vehicles",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "technical_information",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    current_mileage = table.Column<decimal>(type: "TEXT", nullable: false),
+                    fuel_type = table.Column<int>(type: "INTEGER", nullable: false),
+                    average_consumption = table.Column<decimal>(type: "TEXT", nullable: false),
+                    tank_size = table.Column<decimal>(type: "TEXT", nullable: false),
+                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_technical_information", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_technical_information_vehicles_id",
+                        column: x => x.id,
+                        principalTable: "vehicles",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "traffic_fines",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    vehicle_id = table.Column<int>(type: "INTEGER", nullable: false),
+                    violation = table.Column<string>(type: "TEXT", nullable: false),
+                    amount = table.Column<decimal>(type: "TEXT", nullable: false),
+                    date_issued = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    paid_at = table.Column<DateOnly>(type: "TEXT", nullable: true),
+                    document = table.Column<string>(type: "TEXT", nullable: true),
+                    last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_traffic_fines", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_traffic_fines_vehicle_vehicle_id",
+                        column: x => x.vehicle_id,
+                        principalTable: "vehicles",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -300,9 +306,14 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                 {
                     table.PrimaryKey("pk_shipments", x => x.id);
                     table.ForeignKey(
-                        name: "fk_shipments_customers_customer_id",
+                        name: "fk_shipments_agents_customer_id",
                         column: x => x.customer_id,
-                        principalTable: "customers",
+                        principalTable: "agents",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_shipments_agents_producer_id",
+                        column: x => x.producer_id,
+                        principalTable: "agents",
                         principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_shipments_freight_freight_id",
@@ -310,11 +321,6 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                         principalTable: "freight",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_shipments_producers_producer_id",
-                        column: x => x.producer_id,
-                        principalTable: "producers",
-                        principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_shipments_products_product_id",
                         column: x => x.product_id,
@@ -333,9 +339,9 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                 column: "truck_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_legal_documents_actor_id",
+                name: "ix_legal_documents_agent_id",
                 table: "legal_documents",
-                column: "actor_id");
+                column: "agent_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_legal_documents_vehicle_id",
@@ -373,13 +379,13 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                 column: "vehicle_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_trucks_driver_id",
-                table: "trucks",
+                name: "ix_vehicles_driver_id",
+                table: "vehicles",
                 column: "driver_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_trucks_trailer_id",
-                table: "trucks",
+                name: "ix_vehicles_trailer_id",
+                table: "vehicles",
                 column: "trailer_id",
                 unique: true);
         }
@@ -409,22 +415,16 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                 name: "traffic_fines");
 
             migrationBuilder.DropTable(
-                name: "customers");
-
-            migrationBuilder.DropTable(
                 name: "freight");
-
-            migrationBuilder.DropTable(
-                name: "producers");
 
             migrationBuilder.DropTable(
                 name: "products");
 
             migrationBuilder.DropTable(
-                name: "trucks");
+                name: "vehicles");
 
             migrationBuilder.DropTable(
-                name: "drivers");
+                name: "agents");
 
             migrationBuilder.DropTable(
                 name: "trailers");

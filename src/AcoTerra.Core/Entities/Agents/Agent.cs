@@ -1,9 +1,9 @@
-﻿using AcoTerra.Core.Entities.Actors.Enums;
+﻿using AcoTerra.Core.Entities.Agents.Enums;
 using AcoTerra.Core.Entities.LegalDocuments;
 
-namespace AcoTerra.Core.Entities.Actors;
+namespace AcoTerra.Core.Entities.Agents;
 
-public abstract class Actor : AuditableEntity
+public abstract class Agent : AuditableEntity
 {
     public int Id { get; set; }
     public required string Name { get; set; }
