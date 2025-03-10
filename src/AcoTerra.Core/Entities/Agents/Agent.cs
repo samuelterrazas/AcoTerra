@@ -6,6 +6,7 @@ namespace AcoTerra.Core.Entities.Agents;
 public abstract class Agent : AuditableEntity
 {
     public int Id { get; set; }
+    public AgentType Type { get; set; }
     public required string Name { get; set; }
     public required IdentificationType IdentificationType { get; set; }
     public required string IdentificationNumber { get; set; }

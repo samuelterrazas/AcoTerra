@@ -12,7 +12,7 @@ internal sealed class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
     {
         builder.ToTable("vehicles")
             .UseTphMappingStrategy()
-            .HasDiscriminator<VehicleType>("Type")
+            .HasDiscriminator(vehicle => vehicle.Type)
             .HasValue<Truck>(VehicleType.Truck);
 
         builder.HasKey(vehicle => vehicle.Id);

@@ -1,4 +1,4 @@
-﻿namespace AcoTerra.Core.Features.Common.DTOs;
+﻿namespace AcoTerra.Core.Common.DTOs;
 
 public sealed record ReferenceDto(
     int Id,

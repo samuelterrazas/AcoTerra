@@ -1,10 +1,9 @@
 ﻿using AcoTerra.Core.Common.Abstractions.Messaging;
 using AcoTerra.Core.Entities.Agents.Enums;
-using AcoTerra.Core.Entities.Drivers.Enums;
 
-namespace AcoTerra.Core.Features.Drivers.CreateDriver;
+namespace AcoTerra.Core.Features.Agents.CreateAgent;
 
-public sealed record CreateDriverCommand(
+public sealed record CreateAgentCommand(
     string Name,
     IdentificationType IdentificationType,
     string IdentificationNumber,

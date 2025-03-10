@@ -1,13 +1,8 @@
 ﻿using AcoTerra.Core.Entities.Agents;
 using AcoTerra.Core.Entities.Agents.Enums;
-using AcoTerra.Core.Entities.Customers;
-using AcoTerra.Core.Entities.Drivers;
-using AcoTerra.Core.Entities.Drivers.Enums;
-using AcoTerra.Core.Entities.Producers;
 using AcoTerra.Core.Entities.Products;
 using AcoTerra.Core.Entities.Products.Enums;
 using AcoTerra.Core.Entities.Trucks;
-using AcoTerra.Core.Entities.Vehicles;
 using Bogus;
 using Bogus.Extensions.UnitedStates;
 using Microsoft.EntityFrameworkCore;
@@ -144,7 +139,7 @@ public sealed class DatabaseInitializer(
                 },
             };
             
-            dbContext.Set<Vehicle>().AddRange(trucks);
+            dbContext.Set<Truck>().AddRange(trucks);
             
             #endregion
             

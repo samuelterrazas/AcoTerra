@@ -1,4 +1,4 @@
-﻿namespace AcoTerra.Core.Entities.Drivers.Enums;
+﻿namespace AcoTerra.Core.Entities.Agents.Enums;
 
 public enum EmploymentStatus
 {

@@ -1,11 +1,13 @@
-﻿using AcoTerra.Core.Entities.Drivers;
+﻿using AcoTerra.Core.Entities.Agents;
 using AcoTerra.Core.Entities.LegalDocuments;
+using AcoTerra.Core.Entities.Vehicles.Enums;
 
 namespace AcoTerra.Core.Entities.Vehicles;
 
 public abstract class Vehicle : AuditableEntity
 {
     public int Id { get; set; }
+    public VehicleType Type { get; set; }
     public required string LicensePlate { get; set; }
     public required string Brand { get; set; }
     public required string Model { get; set; }

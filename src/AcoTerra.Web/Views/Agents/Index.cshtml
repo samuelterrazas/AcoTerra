@@ -1,0 +1,44 @@
+﻿@using AcoTerra.Core.Entities.Agents.Enums
+@using AcoTerra.Core.Features.Agents.SearchAgents
+@model AgentListViewModel
+
+@{
+    ViewData["Title"] = "Agentes";
+}
+
+<h1>Agentes</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Tipo de documento</th>
+            <th scope="col">Número de documento</th>
+            <th scope="col">Número de teléfono</th>
+            <th scope="col">Correo electrónico</th>
+            
+            @if (Model.Type is AgentType.Driver) {
+                <th scope="col">Estado laboral</th>
+                <th scope="col">Fecha de cumpleaños</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (AgentResponse agent in Model.Agents) {
+            <tr>
+                <th scope="row">@agent.Id</th>
+                <td>@agent.Name</td>
+                <td>@agent.IdentificationType</td>
+                <td>@agent.IdentificationNumber</td>
+                <td>@agent.PhoneNumber</td>
+                <td>@agent.Email</td>
+                
+                @if (Model.Type is AgentType.Driver) {
+                    <td>@agent.EmploymentStatus</td>
+                    <td>@agent.DateOfBirth</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

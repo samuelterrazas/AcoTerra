@@ -1,6 +1,5 @@
-﻿using AcoTerra.Core.Entities.Customers;
+﻿using AcoTerra.Core.Entities.Agents;
 using AcoTerra.Core.Entities.Freights.Enums;
-using AcoTerra.Core.Entities.Producers;
 using AcoTerra.Core.Entities.Products;
 
 namespace AcoTerra.Core.Entities.Freights;

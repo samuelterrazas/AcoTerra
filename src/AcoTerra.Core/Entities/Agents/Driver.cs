@@ -1,7 +1,6 @@
-﻿using AcoTerra.Core.Entities.Agents;
-using AcoTerra.Core.Entities.Drivers.Enums;
+﻿using AcoTerra.Core.Entities.Agents.Enums;
 
-namespace AcoTerra.Core.Entities.Drivers;
+namespace AcoTerra.Core.Entities.Agents;
 
 public sealed class Driver : Agent
 {

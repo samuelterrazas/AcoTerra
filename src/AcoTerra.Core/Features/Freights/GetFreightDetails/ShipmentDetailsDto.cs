@@ -1,5 +1,5 @@
-﻿using AcoTerra.Core.Entities.Freights;
-using AcoTerra.Core.Features.Common.DTOs;
+﻿using AcoTerra.Core.Common.DTOs;
+using AcoTerra.Core.Entities.Freights;
 
 namespace AcoTerra.Core.Features.Freights.GetFreightDetails;
 

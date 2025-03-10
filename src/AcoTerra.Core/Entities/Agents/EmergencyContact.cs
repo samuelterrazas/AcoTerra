@@ -1,4 +1,4 @@
-﻿namespace AcoTerra.Core.Entities.Drivers;
+﻿namespace AcoTerra.Core.Entities.Agents;
 
 // TODO
 public sealed record EmergencyContact(

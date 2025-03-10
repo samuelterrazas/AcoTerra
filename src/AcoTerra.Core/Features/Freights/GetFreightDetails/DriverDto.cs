@@ -1,4 +1,4 @@
-﻿using AcoTerra.Core.Entities.Drivers;
+﻿using AcoTerra.Core.Entities.Agents;
 
 namespace AcoTerra.Core.Features.Freights.GetFreightDetails;
 
