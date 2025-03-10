@@ -16,7 +16,7 @@ internal sealed class SearchTrailersQueryHandler(
     {
         IQueryable<Trailer> trailers = dbContext
             .EntitySetFor<Trailer>()
-            //.Where(trailer => trailer) // TODO: Agregar prop de navegación
+            .Where(trailer => trailer.TruckId == null)
             .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(request.LicensePlate))
