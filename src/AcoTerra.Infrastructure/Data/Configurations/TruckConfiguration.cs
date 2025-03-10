@@ -10,7 +10,7 @@ internal sealed class TruckConfiguration : IEntityTypeConfiguration<Truck>
     {
         builder.HasOne(truck => truck.Trailer)
             .WithOne()
-            .HasForeignKey<Truck>(truck => truck.TrailerId)
+            .HasForeignKey<Trailer>(trailer => trailer.TruckId)
             .OnDelete(DeleteBehavior.NoAction);
     }
 }

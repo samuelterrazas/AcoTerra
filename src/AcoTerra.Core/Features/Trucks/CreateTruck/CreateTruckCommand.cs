@@ -1,6 +1,8 @@
 ﻿using AcoTerra.Core.Common.Abstractions;
 using AcoTerra.Core.Common.Abstractions.Messaging;
+using AcoTerra.Core.Entities.Agents;
 using AcoTerra.Core.Entities.Trucks;
+using Microsoft.EntityFrameworkCore;
 
 namespace AcoTerra.Core.Features.Trucks.CreateTruck;
 
@@ -11,8 +13,8 @@ public sealed record CreateTruckCommand(
     int ManufacturingYear,
     string ChassisNumber,
     string EngineNumber,
-    int DriverId,
-    int TrailerId
+    int TrailerId,
+    int DriverId
 ) : ICommand;
 
 
@@ -22,16 +24,25 @@ internal sealed class CreateTruckCommandHandler(
 {
     public async Task Handle(CreateTruckCommand request, CancellationToken cancellationToken)
     {
-        // TODO: Agregar restricción desde la DB
-        // bool isTrailerRegistered = await dbContext
-        //     .EntitySetFor<Trailer>()
-        //     .AsNoTracking()
-        //     .AnyAsync(trailer => trailer.LicensePlate == request.Trailer.LicensePlate, cancellationToken);
-        //
-        // if (isTrailerRegistered)
-        // {
-        //     throw new Exception("Trailer already registered.");
-        // }
+        Trailer? trailer = await dbContext
+            .EntitySetFor<Trailer>()
+            .Where(trailer => trailer.TruckId == null)
+            .FirstOrDefaultAsync(trailer => trailer.Id == request.TrailerId, cancellationToken);
+
+        if (trailer is null)
+        {
+            throw new Exception("The requested resource could not be found.");
+        }
+        
+        Driver? driver = await dbContext
+            .EntitySetFor<Driver>()
+            .Where(driver => driver.VehicleId == null)
+            .FirstOrDefaultAsync(driver => driver.Id == request.DriverId, cancellationToken);
+
+        if (driver is null)
+        {
+            throw new Exception("The requested resource could not be found.");
+        }
         
         var truck = new Truck
         {
@@ -41,8 +52,8 @@ internal sealed class CreateTruckCommandHandler(
             ManufacturingYear = request.ManufacturingYear,
             ChassisNumber = request.ChassisNumber,
             EngineNumber = request.EngineNumber,
-            DriverId = request.DriverId,
-            TrailerId = request.TrailerId,
+            Trailer = trailer,
+            Driver = driver,
         };
 
         dbContext.EntitySetFor<Truck>().Add(truck);

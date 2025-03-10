@@ -14,7 +14,6 @@ public abstract class Vehicle : AuditableEntity
     public required int ManufacturingYear { get; set; }
     public required string ChassisNumber { get; set; }
     public required string EngineNumber { get; set; }
-    public int? DriverId { get; set; }
 
     public TechnicalInformation TechnicalInformation { get; set; } = new();
     public FinancialInformation FinancialInformation { get; set; } = new();

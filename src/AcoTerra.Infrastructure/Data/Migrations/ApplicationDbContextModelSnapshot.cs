@@ -311,8 +311,16 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("license_plate");
 
+                    b.Property<int?>("TruckId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("truck_id");
+
                     b.HasKey("Id")
                         .HasName("pk_trailers");
+
+                    b.HasIndex("TruckId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_trailers_truck_id");
 
                     b.ToTable("trailers", (string)null);
                 });
@@ -547,10 +555,6 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("chassis_number");
 
-                    b.Property<int?>("DriverId")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("driver_id");
-
                     b.Property<string>("EngineNumber")
                         .IsRequired()
                         .HasColumnType("TEXT")
@@ -585,9 +589,6 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                     b.HasKey("Id")
                         .HasName("pk_vehicles");
 
-                    b.HasIndex("DriverId")
-                        .HasDatabaseName("ix_vehicles_driver_id");
-
                     b.ToTable("vehicles", (string)null);
 
                     b.HasDiscriminator<int>("Type");
@@ -620,6 +621,14 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("employment_status");
 
+                    b.Property<int?>("VehicleId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("vehicle_id");
+
+                    b.HasIndex("VehicleId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_agents_vehicle_id");
+
                     b.ToTable("agents", (string)null);
 
                     b.HasDiscriminator().HasValue(1);
@@ -637,14 +646,6 @@ namespace AcoTerra.Infrastructure.Data.Migrations
             modelBuilder.Entity("AcoTerra.Core.Entities.Trucks.Truck", b =>
                 {
                     b.HasBaseType("AcoTerra.Core.Entities.Vehicles.Vehicle");
-
-                    b.Property<int>("TrailerId")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("trailer_id");
-
-                    b.HasIndex("TrailerId")
-                        .IsUnique()
-                        .HasDatabaseName("ix_vehicles_trailer_id");
 
                     b.ToTable("vehicles", (string)null);
 
@@ -717,6 +718,15 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                         .HasConstraintName("fk_legal_documents_vehicle_vehicle_id");
                 });
 
+            modelBuilder.Entity("AcoTerra.Core.Entities.Trucks.Trailer", b =>
+                {
+                    b.HasOne("AcoTerra.Core.Entities.Trucks.Truck", null)
+                        .WithOne("Trailer")
+                        .HasForeignKey("AcoTerra.Core.Entities.Trucks.Trailer", "TruckId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasConstraintName("fk_trailers_vehicle_truck_id");
+                });
+
             modelBuilder.Entity("AcoTerra.Core.Entities.Vehicles.AdditionalEquipment", b =>
                 {
                     b.HasOne("AcoTerra.Core.Entities.Vehicles.Vehicle", null)
@@ -767,27 +777,13 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                         .HasConstraintName("fk_traffic_fines_vehicle_vehicle_id");
                 });
 
-            modelBuilder.Entity("AcoTerra.Core.Entities.Vehicles.Vehicle", b =>
+            modelBuilder.Entity("AcoTerra.Core.Entities.Agents.Driver", b =>
                 {
-                    b.HasOne("AcoTerra.Core.Entities.Agents.Driver", "Driver")
-                        .WithMany()
-                        .HasForeignKey("DriverId")
+                    b.HasOne("AcoTerra.Core.Entities.Vehicles.Vehicle", null)
+                        .WithOne("Driver")
+                        .HasForeignKey("AcoTerra.Core.Entities.Agents.Driver", "VehicleId")
                         .OnDelete(DeleteBehavior.NoAction)
-                        .HasConstraintName("fk_vehicles_agents_driver_id");
-
-                    b.Navigation("Driver");
-                });
-
-            modelBuilder.Entity("AcoTerra.Core.Entities.Trucks.Truck", b =>
-                {
-                    b.HasOne("AcoTerra.Core.Entities.Trucks.Trailer", "Trailer")
-                        .WithOne()
-                        .HasForeignKey("AcoTerra.Core.Entities.Trucks.Truck", "TrailerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicles_trailers_trailer_id");
-
-                    b.Navigation("Trailer");
+                        .HasConstraintName("fk_agents_vehicle_vehicle_id");
                 });
 
             modelBuilder.Entity("AcoTerra.Core.Entities.Agents.Agent", b =>
@@ -804,6 +800,8 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                 {
                     b.Navigation("AdditionalEquipment");
 
+                    b.Navigation("Driver");
+
                     b.Navigation("FinancialInformation")
                         .IsRequired();
 
@@ -815,6 +813,11 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("TrafficFines");
+                });
+
+            modelBuilder.Entity("AcoTerra.Core.Entities.Trucks.Truck", b =>
+                {
+                    b.Navigation("Trailer");
                 });
 #pragma warning restore 612, 618
         }

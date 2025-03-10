@@ -1,6 +1,6 @@
 ﻿using AcoTerra.Core.Entities.Agents;
 
-namespace AcoTerra.Core.Features.Freights.GetFreightDetails;
+namespace AcoTerra.Core.Common.DTOs;
 
 public sealed record DriverDto(
     int Id,

@@ -7,4 +7,5 @@ public sealed class Driver : Agent
     public required EmploymentStatus EmploymentStatus { get; set; }
     public required DateOnly DateOfBirth { get; set; }
     public string? EmergencyContact { get; set; }
+    public int? VehicleId { get; set; }
 }

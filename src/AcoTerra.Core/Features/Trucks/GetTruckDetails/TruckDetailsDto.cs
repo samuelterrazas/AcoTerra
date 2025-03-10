@@ -13,7 +13,8 @@ internal sealed record TruckDetailsDto(
     string EngineNumber,
     TechnicalInformationDto TechnicalInformation,
     FinancialInformationDto FinancialInformation,
-    TrailerDto? Trailer
+    TrailerDto? Trailer,
+    DriverDto? Driver
 )
 {
     public static explicit operator TruckDetailsDto(Truck truck)
@@ -30,6 +31,9 @@ internal sealed record TruckDetailsDto(
             FinancialInformation: (FinancialInformationDto)truck.FinancialInformation,
             Trailer: truck.Trailer is not null
                 ? (TrailerDto)truck.Trailer
+                : null,
+            Driver: truck.Driver is not null
+                ? (DriverDto)truck.Driver
                 : null
         );
     }

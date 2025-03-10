@@ -86,62 +86,6 @@ public sealed class DatabaseInitializer(
             dbContext.Set<Agent>().AddRange(agents);
             
             #endregion
-
-            #region Trailers
-
-            var trailers = new List<Trailer>
-            {
-                new()
-                {
-                    Id = 1,
-                    LicensePlate = "BA 321 DC",
-                    Capacity = 45_000,
-                },
-                new()
-                {
-                    Id = 2,
-                    LicensePlate = "AC 654 FE",
-                    Capacity = 48_000,
-                },
-            };
-            
-            dbContext.Set<Trailer>().AddRange(trailers);
-
-            #endregion
-
-            #region Trucks
-
-            var trucks = new List<Truck>
-            {
-                new()
-                {
-                    Id = 1,
-                    LicensePlate = "AB 123 CD",
-                    Brand = "Mercedes-Benz",
-                    Model = "Actros 2645",
-                    ManufacturingYear = 2020,
-                    ChassisNumber = "8APZZZ12345678901",
-                    EngineNumber = "MBOM471198A123456",
-                    DriverId = 1,
-                    TrailerId = 1,
-                },
-                new()
-                {
-                    Id = 2,
-                    LicensePlate = "AC 456 EF",
-                    Brand = "Scania",
-                    Model = "R 500",
-                    ManufacturingYear = 2021,
-                    ChassisNumber = "9BSZZZ12345678902",
-                    EngineNumber = "SCANIA12345AB6789",
-                    DriverId = 2,
-                    TrailerId = 2,
-                },
-            };
-            
-            dbContext.Set<Truck>().AddRange(trucks);
-            
-            #endregion
             
             #region Products
 
@@ -165,6 +109,58 @@ public sealed class DatabaseInitializer(
 
             dbContext.Set<Product>().AddRange(products);
 
+            #endregion
+            
+            #region Trailers
+
+            var trailers = new List<Trailer>
+            {
+                new()
+                {
+                    Id = 1,
+                    LicensePlate = "BA 321 DC",
+                    Capacity = 45_000,
+                },
+                new()
+                {
+                    Id = 2,
+                    LicensePlate = "AC 654 FE",
+                    Capacity = 48_000,
+                },
+            };
+            
+            dbContext.Set<Trailer>().AddRange(trailers);
+
+            #endregion
+            
+            #region Trucks
+
+            var trucks = new List<Truck>
+            {
+                new()
+                {
+                    Id = 1,
+                    LicensePlate = "AB 123 CD",
+                    Brand = "Mercedes-Benz",
+                    Model = "Actros 2645",
+                    ManufacturingYear = 2020,
+                    ChassisNumber = "8APZZZ12345678901",
+                    EngineNumber = "MBOM471198A123456",
+                },
+                new()
+                {
+                    Id = 2,
+                    LicensePlate = "AC 456 EF",
+                    Brand = "Scania",
+                    Model = "R 500",
+                    ManufacturingYear = 2021,
+                    ChassisNumber = "9BSZZZ12345678902",
+                    EngineNumber = "SCANIA12345AB6789",
+                },
+            };
+            
+            dbContext.Set<Truck>().AddRange(trucks);
+            
             #endregion
 
             await dbContext.SaveChangesAsync();

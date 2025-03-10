@@ -1,4 +1,5 @@
-﻿using AcoTerra.Core.Entities.Trucks;
+﻿using AcoTerra.Core.Entities.Agents;
+using AcoTerra.Core.Entities.Trucks;
 using AcoTerra.Core.Entities.Vehicles;
 using AcoTerra.Core.Entities.Vehicles.Enums;
 using Microsoft.EntityFrameworkCore;
@@ -48,8 +49,8 @@ internal sealed class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(vehicle => vehicle.Driver)
-            .WithMany()
-            .HasForeignKey(vehicle => vehicle.DriverId)
+            .WithOne()
+            .HasForeignKey<Driver>(driver => driver.VehicleId)
             .OnDelete(DeleteBehavior.NoAction);
     }
 }

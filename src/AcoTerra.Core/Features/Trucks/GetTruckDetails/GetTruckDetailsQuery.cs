@@ -20,6 +20,7 @@ internal sealed class GetTruckDetailsQueryHandler(
             .Include(truck => truck.TechnicalInformation)
             .Include(truck => truck.FinancialInformation)
             .Include(truck => truck.Trailer)
+            .Include(truck => truck.Driver)
             .FirstOrDefaultAsync(truck => truck.Id == request.Id, cancellationToken);
 
         if (truck is null)
