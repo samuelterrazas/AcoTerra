@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcoTerra.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250308012818_Migration_001")]
+    [Migration("20250310002323_Migration_001")]
     partial class Migration_001
     {
         /// <inheritdoc />
@@ -598,7 +598,7 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("AcoTerra.Core.Entities.Customers.Customer", b =>
+            modelBuilder.Entity("AcoTerra.Core.Entities.Agents.Customer", b =>
                 {
                     b.HasBaseType("AcoTerra.Core.Entities.Agents.Agent");
 
@@ -607,7 +607,7 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                     b.HasDiscriminator().HasValue(3);
                 });
 
-            modelBuilder.Entity("AcoTerra.Core.Entities.Drivers.Driver", b =>
+            modelBuilder.Entity("AcoTerra.Core.Entities.Agents.Driver", b =>
                 {
                     b.HasBaseType("AcoTerra.Core.Entities.Agents.Agent");
 
@@ -628,7 +628,7 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                     b.HasDiscriminator().HasValue(1);
                 });
 
-            modelBuilder.Entity("AcoTerra.Core.Entities.Producers.Producer", b =>
+            modelBuilder.Entity("AcoTerra.Core.Entities.Agents.Producer", b =>
                 {
                     b.HasBaseType("AcoTerra.Core.Entities.Agents.Agent");
 
@@ -668,7 +668,7 @@ namespace AcoTerra.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.Core.Entities.Freights.Shipment", b =>
                 {
-                    b.HasOne("AcoTerra.Core.Entities.Customers.Customer", "Customer")
+                    b.HasOne("AcoTerra.Core.Entities.Agents.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -682,7 +682,7 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_shipments_freight_freight_id");
 
-                    b.HasOne("AcoTerra.Core.Entities.Producers.Producer", "Producer")
+                    b.HasOne("AcoTerra.Core.Entities.Agents.Producer", "Producer")
                         .WithMany()
                         .HasForeignKey("ProducerId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -772,7 +772,7 @@ namespace AcoTerra.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("AcoTerra.Core.Entities.Vehicles.Vehicle", b =>
                 {
-                    b.HasOne("AcoTerra.Core.Entities.Drivers.Driver", "Driver")
+                    b.HasOne("AcoTerra.Core.Entities.Agents.Driver", "Driver")
                         .WithMany()
                         .HasForeignKey("DriverId")
                         .OnDelete(DeleteBehavior.NoAction)

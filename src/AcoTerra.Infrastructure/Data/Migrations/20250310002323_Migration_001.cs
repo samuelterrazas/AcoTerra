@@ -17,12 +17,12 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    type = table.Column<int>(type: "INTEGER", nullable: false),
                     name = table.Column<string>(type: "TEXT", nullable: false),
                     identification_type = table.Column<int>(type: "INTEGER", nullable: false),
                     identification_number = table.Column<string>(type: "TEXT", nullable: false),
                     phone_number = table.Column<string>(type: "TEXT", nullable: false),
                     email = table.Column<string>(type: "TEXT", nullable: true),
-                    type = table.Column<int>(type: "INTEGER", nullable: false),
                     employment_status = table.Column<int>(type: "INTEGER", nullable: true),
                     date_of_birth = table.Column<DateOnly>(type: "TEXT", nullable: true),
                     emergency_contact = table.Column<string>(type: "TEXT", nullable: true),
@@ -74,6 +74,7 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    type = table.Column<int>(type: "INTEGER", nullable: false),
                     license_plate = table.Column<string>(type: "TEXT", nullable: false),
                     brand = table.Column<string>(type: "TEXT", nullable: false),
                     model = table.Column<string>(type: "TEXT", nullable: false),
@@ -81,7 +82,6 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                     chassis_number = table.Column<string>(type: "TEXT", nullable: false),
                     engine_number = table.Column<string>(type: "TEXT", nullable: false),
                     driver_id = table.Column<int>(type: "INTEGER", nullable: true),
-                    type = table.Column<int>(type: "INTEGER", nullable: false),
                     trailer_id = table.Column<int>(type: "INTEGER", nullable: true),
                     last_modified_at = table.Column<DateTime>(type: "TEXT", nullable: false),
                     last_modified_by = table.Column<string>(type: "TEXT", nullable: true)
