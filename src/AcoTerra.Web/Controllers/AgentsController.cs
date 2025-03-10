@@ -1,5 +1,5 @@
 ﻿using AcoTerra.Core.Entities.Agents.Enums;
-using AcoTerra.Core.Features.Agents.SearchAgents;
+using AcoTerra.Core.Features.Agents.GetAgents;
 using AcoTerra.Web.Models.Agents;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +11,7 @@ public sealed class AgentsController(ISender sender) : Controller
     [HttpGet]
     public async Task<IActionResult> Index([FromQuery] AgentType type)
     {
-        List<AgentResponse> agents = await sender.Send(new SearchAgentsQuery(type));
+        List<AgentListDto> agents = await sender.Send(new GetAgentsQuery(type));
 
         var model = new AgentListViewModel
         {

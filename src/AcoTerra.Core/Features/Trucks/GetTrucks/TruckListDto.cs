@@ -1,8 +1,8 @@
 ﻿using AcoTerra.Core.Entities.Trucks;
 
-namespace AcoTerra.Core.Features.Trucks.SearchTrucks;
+namespace AcoTerra.Core.Features.Trucks.GetTrucks;
 
-public sealed record TruckResponse(
+public sealed record TruckListDto(
     int Id,
     string LicensePlate,
     string Brand,
@@ -12,9 +12,9 @@ public sealed record TruckResponse(
     string EngineNumber
 )
 {
-    public static explicit operator TruckResponse(Truck truck)
+    public static explicit operator TruckListDto(Truck truck)
     {
-        return new TruckResponse(
+        return new TruckListDto(
             Id: truck.Id,
             LicensePlate: truck.LicensePlate,
             Brand: truck.Brand,

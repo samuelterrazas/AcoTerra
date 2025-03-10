@@ -1,5 +1,7 @@
-﻿@using AcoTerra.Core.Entities.Agents.Enums
-@using AcoTerra.Core.Features.Agents.SearchAgents
+﻿@using AcoTerra.Web.Models.Agents
+@using AcoTerra.Core.Entities.Agents.Enums
+@using AcoTerra.Core.Features.Agents.GetAgents
+
 @model AgentListViewModel
 
 @{
@@ -25,7 +27,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (AgentResponse agent in Model.Agents) {
+        @foreach (AgentListDto agent in Model.Agents) {
             <tr>
                 <th scope="row">@agent.Id</th>
                 <td>@agent.Name</td>

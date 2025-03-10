@@ -1,9 +1,9 @@
-﻿using AcoTerra.Core.Entities.Trucks;
-using AcoTerra.Core.Features.Common.DTOs;
+﻿using AcoTerra.Core.Common.DTOs;
+using AcoTerra.Core.Entities.Trucks;
 
 namespace AcoTerra.Core.Features.Trucks.GetTruckDetails;
 
-internal sealed record TruckDetailsResponse(
+internal sealed record TruckDetailsDto(
     int Id,
     string LicensePlate,
     string Brand,
@@ -16,9 +16,9 @@ internal sealed record TruckDetailsResponse(
     TrailerDto? Trailer
 )
 {
-    public static explicit operator TruckDetailsResponse(Truck truck)
+    public static explicit operator TruckDetailsDto(Truck truck)
     {
-        return new TruckDetailsResponse(
+        return new TruckDetailsDto(
             Id: truck.Id,
             LicensePlate: truck.LicensePlate,
             Brand: truck.Brand,

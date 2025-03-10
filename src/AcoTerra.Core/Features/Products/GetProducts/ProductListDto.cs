@@ -1,8 +1,8 @@
 ﻿using AcoTerra.Core.Entities.Products;
 
-namespace AcoTerra.Core.Features.Products.SearchProducts;
+namespace AcoTerra.Core.Features.Products.GetProducts;
 
-public sealed record ProductResponse(
+public sealed record ProductListDto(
     int Id,
     string Name,
     string PackagingType,
@@ -10,9 +10,9 @@ public sealed record ProductResponse(
     decimal Price
 )
 {
-    public static explicit operator ProductResponse(Product product)
+    public static explicit operator ProductListDto(Product product)
     {
-        return new ProductResponse(
+        return new ProductListDto(
             Id: product.Id,
             Name: product.Name,
             PackagingType: Enum.GetName(product.PackagingType)!,

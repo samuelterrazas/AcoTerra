@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AcoTerra.Core.Features.Trucks.GetTruckDetails;
 
-public sealed record GetTruckDetailsQuery(int Id) : IQuery<TruckDetailsResponse>;
+public sealed record GetTruckDetailsQuery(int Id) : IQuery<TruckDetailsDto>;
 
 
 internal sealed class GetTruckDetailsQueryHandler(
     IApplicationDbContext dbContext
-) : IQueryHandler<GetTruckDetailsQuery, TruckDetailsResponse>
+) : IQueryHandler<GetTruckDetailsQuery, TruckDetailsDto>
 {
-    public async Task<TruckDetailsResponse> Handle(GetTruckDetailsQuery request, CancellationToken cancellationToken)
+    public async Task<TruckDetailsDto> Handle(GetTruckDetailsQuery request, CancellationToken cancellationToken)
     {
         Truck? truck = await dbContext
             .EntitySetFor<Truck>()
@@ -27,6 +27,6 @@ internal sealed class GetTruckDetailsQueryHandler(
             throw new Exception("The requested resource could not be found.");
         }
 
-        return (TruckDetailsResponse)truck;
+        return (TruckDetailsDto)truck;
     }
 }

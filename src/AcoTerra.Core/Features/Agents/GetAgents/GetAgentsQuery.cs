@@ -4,21 +4,21 @@ using AcoTerra.Core.Entities.Agents;
 using AcoTerra.Core.Entities.Agents.Enums;
 using Microsoft.EntityFrameworkCore;
 
-namespace AcoTerra.Core.Features.Agents.SearchAgents;
+namespace AcoTerra.Core.Features.Agents.GetAgents;
 
-public sealed record SearchAgentsQuery(AgentType Type) : IQuery<List<AgentResponse>>;
+public sealed record GetAgentsQuery(AgentType Type) : IQuery<List<AgentListDto>>;
 
 
-internal sealed class SearchAgentsQueryHandler(
+internal sealed class GetAgentsQueryHandler(
     IApplicationDbContext dbContext
-) : IQueryHandler<SearchAgentsQuery, List<AgentResponse>>
+) : IQueryHandler<GetAgentsQuery, List<AgentListDto>>
 {
-    public async Task<List<AgentResponse>> Handle(SearchAgentsQuery request, CancellationToken cancellationToken)
+    public async Task<List<AgentListDto>> Handle(GetAgentsQuery request, CancellationToken cancellationToken)
     {
         return await dbContext
             .EntitySetFor<Agent>()
             .Where(agent => agent.Type == request.Type)
-            .Select(agent => AgentResponse.Map(agent))
+            .Select(agent => AgentListDto.Map(agent))
             .AsNoTracking()
             .ToListAsync(cancellationToken);
     }

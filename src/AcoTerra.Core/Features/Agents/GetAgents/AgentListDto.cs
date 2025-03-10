@@ -1,8 +1,8 @@
 ﻿using AcoTerra.Core.Entities.Agents;
 
-namespace AcoTerra.Core.Features.Agents.SearchAgents;
+namespace AcoTerra.Core.Features.Agents.GetAgents;
 
-public sealed record AgentResponse(
+public sealed record AgentListDto(
     int Id,
     string Name,
     string IdentificationType,
@@ -13,7 +13,7 @@ public sealed record AgentResponse(
     DateOnly? DateOfBirth
 )
 {
-    internal static AgentResponse Map(Agent agent)
+    internal static AgentListDto Map(Agent agent)
     {
         return agent switch
         {
@@ -28,13 +28,13 @@ public sealed record AgentResponse(
         };
     }
 
-    private static AgentResponse CreateAgentResponse(
+    private static AgentListDto CreateAgentResponse(
         Agent agent,
         string? employmentStatus = null,
         DateOnly? dateOfBirth = null
     )
     {
-        return new AgentResponse(
+        return new AgentListDto(
             Id: agent.Id,
             Name: agent.Name,
             IdentificationType: Enum.GetName(agent.IdentificationType)!,

@@ -1,4 +1,6 @@
-﻿@model List<TruckResponse>
+﻿@using AcoTerra.Core.Features.Trucks.GetTrucks
+
+@model List<TruckListDto>
 
 @{
     ViewData["Title"] = "Camiones";
@@ -19,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (TruckResponse truck in Model) {
+        @foreach (TruckListDto truck in Model) {
             <tr>
                 <th scope="row">@truck.Id</th>
                 <td>@truck.LicensePlate</td>

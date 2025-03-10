@@ -2,7 +2,7 @@
 
 namespace AcoTerra.Core.Features.Freights.GetFreightDetails;
 
-public sealed record FreightDetailsResponse(
+public sealed record FreightDetailsDto(
     int Id,
     string Number,
     TruckDto Truck,
@@ -15,9 +15,9 @@ public sealed record FreightDetailsResponse(
     List<ShipmentDetailsDto> Shipments
 )
 {
-    public static explicit operator FreightDetailsResponse(Freight freight)
+    public static explicit operator FreightDetailsDto(Freight freight)
     {
-        return new FreightDetailsResponse(
+        return new FreightDetailsDto(
             Id: freight.Id,
             Number: freight.Number,
             Truck: (TruckDto)freight.Truck,

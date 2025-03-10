@@ -7,8 +7,8 @@ namespace AcoTerra.Core.Features.Trucks.UpdateTruck;
 
 public sealed record UpdateTruckCommand(
     int Id,
-    UpdateTechnicalInformationDto? TechnicalInformation,
-    UpdateFinancialInformationDto? FinancialInformation
+    TechnicalInformationUpdateDto? TechnicalInformation,
+    FinancialInformationUpdateDto? FinancialInformation
 ) : ICommand;
 
 
@@ -42,7 +42,7 @@ internal sealed class UpdateTruckCommandHandler(
         await dbContext.SaveChangesAsync(cancellationToken);
     }
     
-    private static void UpdateTechnicalInformation(UpdateTechnicalInformationDto request, Truck truck)
+    private static void UpdateTechnicalInformation(TechnicalInformationUpdateDto request, Truck truck)
     {
         if (request.CurrentMileage.HasValue)
         {
@@ -65,7 +65,7 @@ internal sealed class UpdateTruckCommandHandler(
         }
     }
 
-    private static void UpdateFinancialInformation(UpdateFinancialInformationDto request, Truck truck)
+    private static void UpdateFinancialInformation(FinancialInformationUpdateDto request, Truck truck)
     {
         if (request.PurchasePrice.HasValue)
         {
