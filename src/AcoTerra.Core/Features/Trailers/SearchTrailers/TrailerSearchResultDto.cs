@@ -2,7 +2,7 @@
 
 namespace AcoTerra.Core.Features.Trailers.SearchTrailers;
 
-internal sealed record TrailerSearchResultDto(
+public sealed record TrailerSearchResultDto(
     int Id,
     string LicensePlate
 )

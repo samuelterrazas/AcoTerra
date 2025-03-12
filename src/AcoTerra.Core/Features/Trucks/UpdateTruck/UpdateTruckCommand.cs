@@ -54,8 +54,8 @@ internal sealed class UpdateTruckCommandHandler(
             {
                 throw new Exception("The requested resource could not be found.");
             }
-            
-            truck.Trailer = trailer;
+
+            trailer.TruckId = truck.Id;
         }
 
         if (request.DriverId.HasValue)
@@ -69,8 +69,8 @@ internal sealed class UpdateTruckCommandHandler(
             {
                 throw new Exception("The requested resource could not be found.");
             }
-            
-            truck.Driver = driver;
+
+            driver.VehicleId = truck.Id;
         }
 
         await dbContext.SaveChangesAsync(cancellationToken);

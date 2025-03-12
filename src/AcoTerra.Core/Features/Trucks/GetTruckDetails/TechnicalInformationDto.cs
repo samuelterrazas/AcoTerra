@@ -2,7 +2,7 @@
 
 namespace AcoTerra.Core.Features.Trucks.GetTruckDetails;
 
-internal sealed record TechnicalInformationDto(
+public sealed record TechnicalInformationDto(
     decimal CurrentMileage,
     string FuelType,
     decimal AverageConsumption,

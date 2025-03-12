@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace AcoTerra.Core.Features.Agents.SearchDrivers;
 
 public sealed record SearchDriversQuery(
-    string Name
+    string? Name = null
 ) : IQuery<List<DriverSearchResultDto>>;
 
 

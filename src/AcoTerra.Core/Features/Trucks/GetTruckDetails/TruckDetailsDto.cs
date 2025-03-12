@@ -3,7 +3,7 @@ using AcoTerra.Core.Entities.Trucks;
 
 namespace AcoTerra.Core.Features.Trucks.GetTruckDetails;
 
-internal sealed record TruckDetailsDto(
+public sealed record TruckDetailsDto(
     int Id,
     string LicensePlate,
     string Brand,

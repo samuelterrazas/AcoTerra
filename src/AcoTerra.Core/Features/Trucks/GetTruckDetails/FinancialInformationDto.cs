@@ -2,7 +2,7 @@
 
 namespace AcoTerra.Core.Features.Trucks.GetTruckDetails;
 
-internal sealed record FinancialInformationDto(
+public sealed record FinancialInformationDto(
     decimal PurchasePrice,
     bool Financed,
     int Installments,
