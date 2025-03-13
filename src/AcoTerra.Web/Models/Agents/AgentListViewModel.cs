@@ -1,10 +1,19 @@
-﻿using AcoTerra.Core.Entities.Agents.Enums;
-using AcoTerra.Core.Features.Agents.GetAgents;
-
-namespace AcoTerra.Web.Models.Agents;
+﻿namespace AcoTerra.Web.Models.Agents;
 
 public sealed class AgentListViewModel
 {
     public AgentType Type { get; init; }
-    public List<AgentListDto> Agents { get; init; } = [];
+    public List<AgentViewModel> Agents { get; init; } = [];
+}
+
+public sealed class AgentViewModel
+{
+    public int Id { get; init; }
+    public string? Name { get; init; }
+    public string? IdentificationType { get; init; }
+    public string? IdentificationNumber { get; init; }
+    public string? PhoneNumber { get; init; }
+    public string? Email { get; init; }
+    public string? EmploymentStatus { get; init; }
+    public DateOnly? DateOfBirth { get; init; }
 }

@@ -1,17 +1,15 @@
-﻿using AcoTerra.Core.Entities.Agents.Enums;
-using AcoTerra.Core.Features.Agents.GetAgents;
-using AcoTerra.Web.Models.Agents;
-using MediatR;
+﻿using AcoTerra.Web.Models.Agents;
+using AcoTerra.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AcoTerra.Web.Controllers;
 
-public sealed class AgentsController(ISender sender) : Controller
+public sealed class AgentsController(IAgentService service) : Controller
 {
     [HttpGet]
-    public async Task<IActionResult> Index([FromQuery] AgentType type)
+    public async Task<IActionResult> Index([FromQuery] AgentType type, CancellationToken cancellationToken)
     {
-        List<AgentListDto> agents = await sender.Send(new GetAgentsQuery(type));
+        List<AgentViewModel> agents = await service.GetAgents(type, cancellationToken);
 
         var model = new AgentListViewModel
         {

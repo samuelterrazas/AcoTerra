@@ -18,10 +18,10 @@ internal static class Trucks
             .WithTags(nameof(Trucks));
 
         groupBuilder.MapGet("/", GetTrucks);
-        groupBuilder.MapGet("{id:int}", GetTruckDetails);
+        groupBuilder.MapGet("/{id:int}", GetTruckDetails);
         groupBuilder.MapPost("/", CreateTruck);
-        groupBuilder.MapPut("{id:int}", UpdateTruck);
-        groupBuilder.MapDelete("{id:int}", DeleteTruck);
+        groupBuilder.MapPut("/{id:int}", UpdateTruck);
+        groupBuilder.MapDelete("/{id:int}", DeleteTruck);
     }
     
     private static async Task<Ok<List<TruckListDto>>> GetTrucks(
@@ -30,9 +30,9 @@ internal static class Trucks
     )
     {
         var query = new GetTrucksQuery();
-        List<TruckListDto> trucks = await sender.Send(query, cancellationToken);
+        List<TruckListDto> result = await sender.Send(query, cancellationToken);
         
-        return TypedResults.Ok(trucks);
+        return TypedResults.Ok(result);
     }
 
     private static async Task<Ok<TruckDetailsDto>> GetTruckDetails(
@@ -42,9 +42,9 @@ internal static class Trucks
     )
     {
         var query = new GetTruckDetailsQuery(id);
-        TruckDetailsDto truckDetails = await sender.Send(query, cancellationToken);
+        TruckDetailsDto result = await sender.Send(query, cancellationToken);
         
-        return TypedResults.Ok(truckDetails);
+        return TypedResults.Ok(result);
     }
     
     private static async Task<Created> CreateTruck(

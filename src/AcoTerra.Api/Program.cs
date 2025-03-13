@@ -28,6 +28,8 @@ WebApplication app = builder.Build();
     app.UseHttpsRedirection();
     
     app.MapTruckEndpoints();
+    app.MapTrailerEndpoints();
+    app.MapAgentEndpoints();
 
     app.Run();
 }

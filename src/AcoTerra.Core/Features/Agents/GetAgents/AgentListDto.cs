@@ -1,9 +1,11 @@
 ﻿using AcoTerra.Core.Entities.Agents;
+using AcoTerra.Core.Entities.Agents.Enums;
 
 namespace AcoTerra.Core.Features.Agents.GetAgents;
 
 public sealed record AgentListDto(
     int Id,
+    AgentType Type,
     string Name,
     string IdentificationType,
     string IdentificationNumber,
@@ -36,6 +38,7 @@ public sealed record AgentListDto(
     {
         return new AgentListDto(
             Id: agent.Id,
+            Type: agent.Type,
             Name: agent.Name,
             IdentificationType: Enum.GetName(agent.IdentificationType)!,
             IdentificationNumber: agent.IdentificationNumber,

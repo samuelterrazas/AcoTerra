@@ -1,13 +1,23 @@
-using AcoTerra.Core;
-using AcoTerra.Infrastructure;
-using AcoTerra.Infrastructure.Data;
+using AcoTerra.Web.Services;
+using Refit;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddControllersWithViews();
+
+    builder.Services.AddRefitClient<ITruckService>()
+        .ConfigureHttpClient((_, client) =>
+        {
+            client.BaseAddress = new Uri("https://localhost:7041/api/trucks");
+            client.Timeout = TimeSpan.FromSeconds(30);
+        });
     
-    builder.Services.AddInfrastructure(builder.Configuration);
-    builder.Services.AddCore();
+    builder.Services.AddRefitClient<IAgentService>()
+        .ConfigureHttpClient((_, client) =>
+        {
+            client.BaseAddress = new Uri("https://localhost:7041/api/agents");
+            client.Timeout = TimeSpan.FromSeconds(30);
+        });
 }
 
 WebApplication app = builder.Build();
@@ -17,14 +27,6 @@ WebApplication app = builder.Build();
         app.UseExceptionHandler("/Home/Error");
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
         app.UseHsts();
-    }
-
-    using (IServiceScope scope = app.Services.CreateScope())
-    {
-        var initializer = scope.ServiceProvider.GetRequiredService<DatabaseInitializer>();
-
-        await initializer.InitializeAsync();
-        // await initializer.SeedAsync();
     }
 
     app.UseHttpsRedirection();
