@@ -13,14 +13,14 @@ internal static class Trailers
             .MapGroup("/api/trailers")
             .WithTags(nameof(Trailers));
 
-        groupBuilder.MapGet("/", SearchTrailer);
+        groupBuilder.MapGet("/", SearchTrailers);
         // groupBuilder.MapGet("{id:int}", );
         // groupBuilder.MapPost("/", );
         // groupBuilder.MapPut("{id:int}", );
         // groupBuilder.MapDelete("{id:int}", );
     }
     
-    private static async Task<Ok<List<TrailerSearchResultDto>>> SearchTrailer(
+    private static async Task<Ok<List<TrailerSearchResultDto>>> SearchTrailers(
         string? licensePlate,
         [FromServices] ISender sender,
         CancellationToken cancellationToken

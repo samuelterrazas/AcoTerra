@@ -12,6 +12,13 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
             client.Timeout = TimeSpan.FromSeconds(30);
         });
     
+    builder.Services.AddRefitClient<ITrailerService>()
+        .ConfigureHttpClient((_, client) =>
+        {
+            client.BaseAddress = new Uri("https://localhost:7041/api/trailers");
+            client.Timeout = TimeSpan.FromSeconds(30);
+        });
+    
     builder.Services.AddRefitClient<IAgentService>()
         .ConfigureHttpClient((_, client) =>
         {

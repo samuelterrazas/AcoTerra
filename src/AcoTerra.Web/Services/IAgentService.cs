@@ -6,6 +6,9 @@ namespace AcoTerra.Web.Services;
 
 public interface IAgentService
 {
-    [Get("")]
+    [Get("/")]
     Task<List<AgentViewModel>> GetAgents([FromQuery] AgentType type, CancellationToken cancellationToken);
+    
+    [Get("/drivers")]
+    Task<List<DriverSearchResultViewModel>> SearchDrivers([FromQuery] string? name, CancellationToken cancellationToken);
 }

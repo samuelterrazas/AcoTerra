@@ -5,6 +5,6 @@ namespace AcoTerra.Web.Services;
 
 public interface ITruckService
 {
-    [Get("")]
+    [Get("/")]
     Task<List<TruckListViewModel>> GetTrucks(CancellationToken cancellationToken);
 }
