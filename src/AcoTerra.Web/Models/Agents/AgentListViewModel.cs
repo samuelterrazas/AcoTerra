@@ -9,6 +9,7 @@ public sealed class AgentListViewModel
 public sealed class AgentViewModel
 {
     public int Id { get; init; }
+    public int Type { get; init; }
     public string? Name { get; init; }
     public string? IdentificationType { get; init; }
     public string? IdentificationNumber { get; init; }

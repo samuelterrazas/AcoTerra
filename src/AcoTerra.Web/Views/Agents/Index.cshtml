@@ -8,37 +8,76 @@
 
 <h1>Agentes</h1>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Tipo de documento</th>
-            <th scope="col">Número de documento</th>
-            <th scope="col">Número de teléfono</th>
-            <th scope="col">Correo electrónico</th>
-            
-            @if (Model.Type is AgentType.Driver) {
-                <th scope="col">Estado laboral</th>
-                <th scope="col">Fecha de cumpleaños</th>
-            }
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (AgentViewModel agent in Model.Agents) {
-            <tr>
-                <th scope="row">@agent.Id</th>
-                <td>@agent.Name</td>
-                <td>@agent.IdentificationType</td>
-                <td>@agent.IdentificationNumber</td>
-                <td>@agent.PhoneNumber</td>
-                <td>@agent.Email</td>
-                
-                @if (Model.Type is AgentType.Driver) {
-                    <td>@agent.EmploymentStatus</td>
-                    <td>@agent.DateOfBirth</td>
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Conductores</a></li>
+        <li><a href="#tabs-2">Clientes</a></li>
+        <li><a href="#tabs-3">Productores</a></li>
+    </ul>
+
+    @foreach (AgentType type in Enum.GetValues(typeof(AgentType)).Cast<AgentType>())
+    {
+        <div id="tabs-@(type switch { AgentType.Driver => 1, AgentType.Producer => 2, AgentType.Customer => 3 })">
+            <table class="table table-striped" >
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Tipo de documento</th>
+                    <th scope="col">Número de documento</th>
+                    <th scope="col">Número de teléfono</th>
+                    <th scope="col">Correo electrónico</th>
+
+                    @if (type is AgentType.Driver) {
+                        <th scope="col">Estado laboral</th>
+                        <th scope="col">Fecha de cumpleaños</th>
+                    }
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (AgentViewModel agent in Model.Agents.Where(a => a.Type == (int)type)) {
+                    <tr>
+                        <th scope="row">@agent.Id</th>
+                        <td>@agent.Name</td>
+                        <td>@agent.IdentificationType</td>
+                        <td>@agent.IdentificationNumber</td>
+                        <td>@agent.PhoneNumber</td>
+                        <td>@agent.Email</td>
+
+                        @if (type == AgentType.Driver) {
+                            <td>@agent.EmploymentStatus</td>
+                            <td>@agent.DateOfBirth</td>
+                        }
+                    </tr>
                 }
-            </tr>
-        }
-    </tbody>
-</table>
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@section Scripts
+{
+    <script>
+        $( function() {
+            let typeFromUrl = new URLSearchParams(window.location.search).get("type");
+            let selectedTab = 0;
+
+            switch (typeFromUrl) {
+                case "Driver": selectedTab = 0; break;
+                case "Producer": selectedTab = 1; break;
+                case "Customer": selectedTab = 2; break;
+            }
+
+            $( "#tabs" ).tabs({
+                active: selectedTab,
+                activate: function (event, ui) {
+                    let newType = ["Driver", "Producer", "Customer"][ui.newTab.index()];
+                    let newUrl = new URL(window.location.href);
+                    newUrl.searchParams.set("type", newType);
+                    window.location.href = newUrl.toString();
+                }
+            });
+        } );
+    </script>
+}
