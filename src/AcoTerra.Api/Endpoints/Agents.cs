@@ -1,6 +1,10 @@
 ﻿using AcoTerra.Core.Entities.Agents.Enums;
+using AcoTerra.Core.Features.Agents.CreateAgent;
+using AcoTerra.Core.Features.Agents.DeleteAgent;
+using AcoTerra.Core.Features.Agents.GetAgentDetails;
 using AcoTerra.Core.Features.Agents.GetAgents;
 using AcoTerra.Core.Features.Agents.SearchDrivers;
+using AcoTerra.Core.Features.Agents.UpdateAgent;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +20,12 @@ internal static class Agents
             .WithTags(nameof(Agents));
 
         groupBuilder.MapGet("/", GetAgents);
+        groupBuilder.MapGet("/{id:int}", GetAgentDetails);
+        groupBuilder.MapPost("/", CreateAgent);
+        groupBuilder.MapPut("{id:int}", UpdateAgent);
+        groupBuilder.MapDelete("{id:int}", DeleteAgent);
+        
         groupBuilder.MapGet("/drivers", SearchDrivers);
-        // groupBuilder.MapPost("/", );
-        // groupBuilder.MapPut("{id:int}", );
-        // groupBuilder.MapDelete("{id:int}", );
     }
     
     private static async Task<Ok<List<AgentListDto>>> GetAgents(
@@ -28,10 +34,58 @@ internal static class Agents
         CancellationToken cancellationToken
     )
     {
-        var query = new GetAgentsQuery(type);
-        List<AgentListDto> result = await sender.Send(query, cancellationToken);
+        var request = new GetAgentsQuery(type);
+        List<AgentListDto> result = await sender.Send(request, cancellationToken);
         
         return TypedResults.Ok(result);
+    }
+
+    private static async Task<Ok<AgentDetailsDto>> GetAgentDetails(
+        int id,
+        [FromServices] ISender sender,
+        CancellationToken cancellationToken
+    )
+    {
+        var request = new GetAgentDetailsQuery(id);
+        AgentDetailsDto result = await sender.Send(request, cancellationToken);
+        
+        return TypedResults.Ok(result);
+    }
+
+    private static async Task<Created> CreateAgent(
+        CreateAgentCommand request,
+        [FromServices] ISender sender,
+        CancellationToken cancellationToken
+    )
+    {
+        await sender.Send(request, cancellationToken);
+        
+        return TypedResults.Created();
+    }
+
+    private static async Task<NoContent> UpdateAgent(
+        int id,
+        UpdateAgentCommand request,
+        [FromServices] ISender sender,
+        CancellationToken cancellationToken
+    )
+    {
+        request = request with { Id = id };
+        await sender.Send(request, cancellationToken);
+        
+        return TypedResults.NoContent();
+    }
+
+    private static async Task<NoContent> DeleteAgent(
+        int id,
+        [FromServices] ISender sender,
+        CancellationToken cancellationToken
+    )
+    {
+        var request = new DeleteAgentCommand(id);
+        await sender.Send(request, cancellationToken);
+        
+        return TypedResults.NoContent();
     }
     
     private static async Task<Ok<List<DriverSearchResultDto>>> SearchDrivers(
@@ -40,8 +94,8 @@ internal static class Agents
         CancellationToken cancellationToken
     )
     {
-        var query = new SearchDriversQuery(name);
-        List<DriverSearchResultDto> result = await sender.Send(query, cancellationToken);
+        var request = new SearchDriversQuery(name);
+        List<DriverSearchResultDto> result = await sender.Send(request, cancellationToken);
         
         return TypedResults.Ok(result);
     }

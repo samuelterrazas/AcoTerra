@@ -12,7 +12,7 @@ public sealed record CreateFreightCommand(
     string? Remarks
 ) : ICommand;
 
-
+// TODO
 internal sealed class CreateFreightCommandHandler(
     IApplicationDbContext dbContext
 ) : ICommandHandler<CreateFreightCommand>

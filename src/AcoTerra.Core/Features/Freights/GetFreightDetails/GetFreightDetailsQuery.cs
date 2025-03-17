@@ -1,5 +1,6 @@
 ﻿using AcoTerra.Core.Common.Abstractions;
 using AcoTerra.Core.Common.Abstractions.Messaging;
+using AcoTerra.Core.Common.Exceptions;
 using AcoTerra.Core.Entities.Freights;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,7 +32,7 @@ internal sealed class GetFreightDetailsQueryHandler(
 
         if (freight is null)
         {
-            throw new Exception("The requested resource was not found.");
+            throw new NotFoundException();
         }
 
         return (FreightDetailsDto)freight;

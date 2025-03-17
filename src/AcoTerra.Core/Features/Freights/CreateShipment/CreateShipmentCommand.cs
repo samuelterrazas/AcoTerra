@@ -17,7 +17,7 @@ public sealed record CreateShipmentCommand(
     string Location
 ) : ICommand;
 
-
+// TODO
 internal sealed class CreateShipmentCommandHandler(
     IApplicationDbContext dbContext,
     IMediator mediator

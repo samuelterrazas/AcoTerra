@@ -29,8 +29,8 @@ internal static class Trucks
         CancellationToken cancellationToken
     )
     {
-        var query = new GetTrucksQuery();
-        List<TruckListDto> result = await sender.Send(query, cancellationToken);
+        var request = new GetTrucksQuery();
+        List<TruckListDto> result = await sender.Send(request, cancellationToken);
         
         return TypedResults.Ok(result);
     }
@@ -41,32 +41,32 @@ internal static class Trucks
         CancellationToken cancellationToken
     )
     {
-        var query = new GetTruckDetailsQuery(id);
-        TruckDetailsDto result = await sender.Send(query, cancellationToken);
+        var request = new GetTruckDetailsQuery(id);
+        TruckDetailsDto result = await sender.Send(request, cancellationToken);
         
         return TypedResults.Ok(result);
     }
     
     private static async Task<Created> CreateTruck(
-        CreateTruckCommand command,
+        CreateTruckCommand request,
         [FromServices] ISender sender,
         CancellationToken cancellationToken
     )
     {
-        await sender.Send(command, cancellationToken);
+        await sender.Send(request, cancellationToken);
         
         return TypedResults.Created();
     }
 
     private static async Task<NoContent> UpdateTruck(
         int id,
-        UpdateTruckCommand command,
+        UpdateTruckCommand request,
         [FromServices] ISender sender,
         CancellationToken cancellationToken
     )
     {
-        command = command with { Id = id };
-        await sender.Send(command, cancellationToken);
+        request = request with { Id = id };
+        await sender.Send(request, cancellationToken);
         
         return TypedResults.NoContent();
     }
@@ -77,8 +77,8 @@ internal static class Trucks
         CancellationToken cancellationToken
     )
     {
-        var command = new DeleteTruckCommand(id);
-        await sender.Send(command, cancellationToken);
+        var request = new DeleteTruckCommand(id);
+        await sender.Send(request, cancellationToken);
         
         return TypedResults.NoContent();
     }

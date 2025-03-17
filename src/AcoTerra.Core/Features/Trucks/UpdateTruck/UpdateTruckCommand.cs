@@ -1,7 +1,9 @@
 ﻿using AcoTerra.Core.Common.Abstractions;
 using AcoTerra.Core.Common.Abstractions.Messaging;
+using AcoTerra.Core.Common.Exceptions;
 using AcoTerra.Core.Entities.Agents;
 using AcoTerra.Core.Entities.Trucks;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace AcoTerra.Core.Features.Trucks.UpdateTruck;
@@ -12,14 +14,14 @@ public sealed record UpdateTruckCommand(
     FinancialInformationUpdateDto? FinancialInformation,
     int? TrailerId,
     int? DriverId
-) : ICommand;
+) : ICommand<Unit>;
 
 
 internal sealed class UpdateTruckCommandHandler(
     IApplicationDbContext dbContext
-) : ICommandHandler<UpdateTruckCommand> // TODO
+) : ICommandHandler<UpdateTruckCommand, Unit> // TODO
 {
-    public async Task Handle(UpdateTruckCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateTruckCommand request, CancellationToken cancellationToken)
     {
         Truck? truck = await dbContext.EntitySetFor<Truck>()
             .Include(truck => truck.TechnicalInformation)
@@ -30,7 +32,7 @@ internal sealed class UpdateTruckCommandHandler(
 
         if (truck is null)
         {
-            throw new Exception("The requested resource could not be found.");
+            throw new NotFoundException();
         }
 
         if (request.TechnicalInformation is not null)
@@ -52,7 +54,7 @@ internal sealed class UpdateTruckCommandHandler(
 
             if (trailer is null)
             {
-                throw new Exception("The requested resource could not be found.");
+                throw new NotFoundException();
             }
 
             trailer.TruckId = truck.Id;
@@ -67,13 +69,15 @@ internal sealed class UpdateTruckCommandHandler(
 
             if (driver is null)
             {
-                throw new Exception("The requested resource could not be found.");
+                throw new NotFoundException();
             }
 
             driver.VehicleId = truck.Id;
         }
-
+        
         await dbContext.SaveChangesAsync(cancellationToken);
+        
+        return Unit.Value;
     }
     
     private static void UpdateTechnicalInformation(TechnicalInformationUpdateDto request, Truck truck)

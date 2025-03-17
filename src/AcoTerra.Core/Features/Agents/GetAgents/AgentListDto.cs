@@ -7,12 +7,9 @@ public sealed record AgentListDto(
     int Id,
     AgentType Type,
     string Name,
-    string IdentificationType,
-    string IdentificationNumber,
     string PhoneNumber,
     string? Email,
-    string? EmploymentStatus,
-    DateOnly? DateOfBirth
+    string? EmploymentStatus
 )
 {
     internal static AgentListDto Map(Agent agent)
@@ -21,8 +18,7 @@ public sealed record AgentListDto(
         {
             Driver driver => CreateAgentResponse(
                 agent: driver,
-                employmentStatus: Enum.GetName(driver.EmploymentStatus)!,
-                dateOfBirth: driver.DateOfBirth
+                employmentStatus: Enum.GetName(driver.EmploymentStatus)
             ),
             Producer producer => CreateAgentResponse(producer),
             Customer customer => CreateAgentResponse(customer),
@@ -32,20 +28,16 @@ public sealed record AgentListDto(
 
     private static AgentListDto CreateAgentResponse(
         Agent agent,
-        string? employmentStatus = null,
-        DateOnly? dateOfBirth = null
+        string? employmentStatus = null
     )
     {
         return new AgentListDto(
             Id: agent.Id,
             Type: agent.Type,
             Name: agent.Name,
-            IdentificationType: Enum.GetName(agent.IdentificationType)!,
-            IdentificationNumber: agent.IdentificationNumber,
             PhoneNumber: agent.PhoneNumber,
             Email: agent.Email,
-            EmploymentStatus: employmentStatus,
-            DateOfBirth: dateOfBirth
+            EmploymentStatus: employmentStatus
         );
     }
 }

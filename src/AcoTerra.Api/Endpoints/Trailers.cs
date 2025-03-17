@@ -26,8 +26,8 @@ internal static class Trailers
         CancellationToken cancellationToken
     )
     {
-        var query = new SearchTrailersQuery(licensePlate);
-        List<TrailerSearchResultDto> result = await sender.Send(query, cancellationToken);
+        var request = new SearchTrailersQuery(licensePlate);
+        List<TrailerSearchResultDto> result = await sender.Send(request, cancellationToken);
         
         return TypedResults.Ok(result);
     }

@@ -3,6 +3,7 @@ using System;
 using AcoTerra.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcoTerra.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250316201732_Migration_002")]
+    partial class Migration_002
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.3");
@@ -48,7 +51,8 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT")
-                        .HasColumnName("name");
+                        .HasColumnName("name")
+                        .UseCollation("NOCASE");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -309,7 +313,8 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                     b.Property<string>("LicensePlate")
                         .IsRequired()
                         .HasColumnType("TEXT")
-                        .HasColumnName("license_plate");
+                        .HasColumnName("license_plate")
+                        .UseCollation("NOCASE");
 
                     b.Property<int?>("TruckId")
                         .HasColumnType("INTEGER")
@@ -571,7 +576,8 @@ namespace AcoTerra.Infrastructure.Data.Migrations
                     b.Property<string>("LicensePlate")
                         .IsRequired()
                         .HasColumnType("TEXT")
-                        .HasColumnName("license_plate");
+                        .HasColumnName("license_plate")
+                        .UseCollation("NOCASE");
 
                     b.Property<int>("ManufacturingYear")
                         .HasColumnType("INTEGER")

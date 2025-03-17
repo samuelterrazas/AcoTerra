@@ -1,5 +1,6 @@
 ﻿using AcoTerra.Core.Common.Abstractions;
 using AcoTerra.Core.Common.Abstractions.Messaging;
+using AcoTerra.Core.Common.Exceptions;
 using AcoTerra.Core.Entities.Trucks;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +26,7 @@ internal sealed class GetTruckDetailsQueryHandler(
 
         if (truck is null)
         {
-            throw new Exception("The requested resource could not be found.");
+            throw new NotFoundException();
         }
 
         return (TruckDetailsDto)truck;

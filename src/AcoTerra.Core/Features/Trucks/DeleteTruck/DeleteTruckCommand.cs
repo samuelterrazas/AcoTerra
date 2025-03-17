@@ -1,18 +1,20 @@
 ﻿using AcoTerra.Core.Common.Abstractions;
 using AcoTerra.Core.Common.Abstractions.Messaging;
+using AcoTerra.Core.Common.Exceptions;
 using AcoTerra.Core.Entities.Trucks;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace AcoTerra.Core.Features.Trucks.DeleteTruck;
 
-public sealed record DeleteTruckCommand(int Id) : ICommand;
+public sealed record DeleteTruckCommand(int Id) : ICommand<Unit>;
 
 
 internal sealed class DeleteTruckCommandHandler(
     IApplicationDbContext dbContext
-) : ICommandHandler<DeleteTruckCommand>
+) : ICommandHandler<DeleteTruckCommand, Unit>
 {
-    public async Task Handle(DeleteTruckCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(DeleteTruckCommand request, CancellationToken cancellationToken)
     {
         Truck? truck = await dbContext.EntitySetFor<Truck>()
             .Include(truck => truck.TechnicalInformation)
@@ -21,11 +23,12 @@ internal sealed class DeleteTruckCommandHandler(
 
         if (truck is null)
         {
-            throw new Exception("The requested resource could not be found.");
+            throw new NotFoundException();
         }
 
         dbContext.EntitySetFor<Truck>().Remove(truck);
-
         await dbContext.SaveChangesAsync(cancellationToken);
+        
+        return Unit.Value;
     }
 }

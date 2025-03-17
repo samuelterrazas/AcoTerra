@@ -1,5 +1,6 @@
 ﻿using AcoTerra.Core.Common.Abstractions;
 using AcoTerra.Core.Common.Abstractions.Messaging;
+using AcoTerra.Core.Common.Exceptions;
 using AcoTerra.Core.Entities.Agents;
 using AcoTerra.Core.Entities.Trucks;
 using Microsoft.EntityFrameworkCore;
@@ -15,14 +16,14 @@ public sealed record CreateTruckCommand(
     string EngineNumber,
     int TrailerId,
     int DriverId
-) : ICommand;
+) : ICommand<int>;
 
 
 internal sealed class CreateTruckCommandHandler(
     IApplicationDbContext dbContext
-) : ICommandHandler<CreateTruckCommand>
+) : ICommandHandler<CreateTruckCommand, int>
 {
-    public async Task Handle(CreateTruckCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateTruckCommand request, CancellationToken cancellationToken)
     {
         Trailer? trailer = await dbContext
             .EntitySetFor<Trailer>()
@@ -31,7 +32,7 @@ internal sealed class CreateTruckCommandHandler(
 
         if (trailer is null)
         {
-            throw new Exception("The requested resource could not be found.");
+            throw new NotFoundException();
         }
         
         Driver? driver = await dbContext
@@ -41,7 +42,7 @@ internal sealed class CreateTruckCommandHandler(
 
         if (driver is null)
         {
-            throw new Exception("The requested resource could not be found.");
+            throw new NotFoundException();
         }
         
         var truck = new Truck
@@ -57,7 +58,8 @@ internal sealed class CreateTruckCommandHandler(
         };
 
         dbContext.EntitySetFor<Truck>().Add(truck);
-        
         await dbContext.SaveChangesAsync(cancellationToken);
+        
+        return truck.Id;
     }
 }
