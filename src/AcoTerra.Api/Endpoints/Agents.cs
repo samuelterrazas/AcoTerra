@@ -25,7 +25,7 @@ internal static class Agents
         groupBuilder.MapPut("{id:int}", UpdateAgent);
         groupBuilder.MapDelete("{id:int}", DeleteAgent);
         
-        groupBuilder.MapGet("/drivers", SearchDrivers);
+        groupBuilder.MapGet("/drivers/search", SearchDrivers);
     }
     
     private static async Task<Ok<List<AgentListDto>>> GetAgents(
@@ -52,15 +52,15 @@ internal static class Agents
         return TypedResults.Ok(result);
     }
 
-    private static async Task<Created> CreateAgent(
+    private static async Task<Created<int>> CreateAgent(
         CreateAgentCommand request,
         [FromServices] ISender sender,
         CancellationToken cancellationToken
     )
     {
-        await sender.Send(request, cancellationToken);
+        int result = await sender.Send(request, cancellationToken);
         
-        return TypedResults.Created();
+        return TypedResults.Created($"/api/agents/{result}", result);
     }
 
     private static async Task<NoContent> UpdateAgent(

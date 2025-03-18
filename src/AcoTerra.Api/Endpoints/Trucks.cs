@@ -47,15 +47,15 @@ internal static class Trucks
         return TypedResults.Ok(result);
     }
     
-    private static async Task<Created> CreateTruck(
+    private static async Task<Created<int>> CreateTruck(
         CreateTruckCommand request,
         [FromServices] ISender sender,
         CancellationToken cancellationToken
     )
     {
-        await sender.Send(request, cancellationToken);
+        int result = await sender.Send(request, cancellationToken);
         
-        return TypedResults.Created();
+        return TypedResults.Created($"/api/trucks/{result}", result);
     }
 
     private static async Task<NoContent> UpdateTruck(
