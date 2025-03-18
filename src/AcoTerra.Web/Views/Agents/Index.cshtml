@@ -23,14 +23,11 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Tipo de documento</th>
-                    <th scope="col">Número de documento</th>
                     <th scope="col">Número de teléfono</th>
                     <th scope="col">Correo electrónico</th>
 
                     @if (type is AgentType.Driver) {
                         <th scope="col">Estado laboral</th>
-                        <th scope="col">Fecha de cumpleaños</th>
                     }
                 </tr>
                 </thead>
@@ -39,14 +36,11 @@
                     <tr>
                         <th scope="row">@agent.Id</th>
                         <td>@agent.Name</td>
-                        <td>@agent.IdentificationType</td>
-                        <td>@agent.IdentificationNumber</td>
                         <td>@agent.PhoneNumber</td>
                         <td>@agent.Email</td>
 
                         @if (type == AgentType.Driver) {
                             <td>@agent.EmploymentStatus</td>
-                            <td>@agent.DateOfBirth</td>
                         }
                     </tr>
                 }

@@ -2,17 +2,17 @@
 
 namespace AcoTerra.Web.Models.Trucks;
 
-public class TruckCreateViewModel
+public sealed class TruckCreateViewModel
 {
-    public string LicensePlate { get; set; }
-    public string Brand { get; set; }
-    public string Model { get; set; }
-    public int ManufacturingYear { get; set; }
-    public string ChassisNumber { get; set; }
-    public string EngineNumber { get; set; }
+    public string LicensePlate { get; init; }
+    public string Brand { get; init; }
+    public string Model { get; init; }
+    public int ManufacturingYear { get; init; }
+    public string ChassisNumber { get; init; }
+    public string EngineNumber { get; init; }
 
-    public int? TrailerId  { get; set; }
-    public int? DriverId { get; set; }
-    public IEnumerable<SelectListItem> Trailers { get; set; }
-    public IEnumerable<SelectListItem> Drivers { get; set; }
+    public int? TrailerId  { get; init; }
+    public int? DriverId { get; init; }
+    public IEnumerable<SelectListItem> Trailers { get; init; }
+    public IEnumerable<SelectListItem> Drivers { get; init; }
 }

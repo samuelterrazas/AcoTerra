@@ -1,9 +1,9 @@
 ﻿namespace AcoTerra.Web.Models.Vehicles;
 
-public class TechnicalInformationDetailsViewModel
+public sealed class TechnicalInformationDetailsViewModel
 {
-    public decimal CurrentMileage { get; set; }
-    public string FuelType { get; set; }
-    public decimal AverageConsumption { get; set; }
-    public decimal TankSize { get; set; }
+    public decimal CurrentMileage { get; init; }
+    public string FuelType { get; init; }
+    public decimal AverageConsumption { get; init; }
+    public decimal TankSize { get; init; }
 }

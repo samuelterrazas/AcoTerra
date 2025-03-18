@@ -25,15 +25,15 @@ public sealed class TrucksController(ITruckService truckService, ITrailerService
         
          var model = new TruckCreateViewModel
          {
-             Trailers = trailers.Select(x => new SelectListItem
+             Trailers = trailers.Select(trailer => new SelectListItem
              {
-                 Value = x.Id.ToString(),
-                 Text = x.LicensePlate
+                 Value = trailer.Id.ToString(),
+                 Text = trailer.LicensePlate
              }),
-             Drivers = drivers.Select(x => new SelectListItem
+             Drivers = drivers.Select(driver => new SelectListItem
              {
-                 Value = x.Id.ToString(),
-                 Text = x.Name
+                 Value = driver.Id.ToString(),
+                 Text = driver.Name
              })
          };
         
@@ -43,6 +43,7 @@ public sealed class TrucksController(ITruckService truckService, ITrailerService
     [HttpPost]
     public async Task<IActionResult> Create(TruckCreateViewModel truckModel, CancellationToken cancellationToken)
     {
+        //TODO Revisar porque salta la validación por mas que haya datos
         // if (!ModelState.IsValid)
         // {
         //     // Recargar listas en caso de error
@@ -63,9 +64,9 @@ public sealed class TrucksController(ITruckService truckService, ITrailerService
     
     public async Task<IActionResult> Details(int id, CancellationToken cancellationToken)
     {
-        var truck = await truckService.GetTruckById(id, cancellationToken);
+        TruckDetailsViewModel? truck = await truckService.GetTruckById(id, cancellationToken);
 
-        if (truck == null)
+        if (truck is null)
         {
             return NotFound();
         }

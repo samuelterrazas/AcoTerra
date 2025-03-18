@@ -1,9 +1,9 @@
 ﻿namespace AcoTerra.Web.Models.Vehicles;
 
-public class FinancialInformationDetailsViewModel
+public sealed class FinancialInformationDetailsViewModel
 {
-    public decimal PurchasePrice { get; set; }
-    public bool Financed { get; set; }
-    public int Installments { get; set; }
-    public decimal OutstandingBalance { get; set; }
+    public decimal PurchasePrice { get; init; }
+    public bool Financed { get; init; }
+    public int Installments { get; init; }
+    public decimal OutstandingBalance { get; init; }
 }

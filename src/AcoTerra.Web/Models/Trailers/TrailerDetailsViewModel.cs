@@ -1,8 +1,8 @@
 ﻿namespace AcoTerra.Web.Models.Trailers;
 
-public class TrailerDetailsViewModel
+public sealed class TrailerDetailsViewModel
 {
-    public int Id { get; set; }
-    public string LicensePlate { get; set; }
-    public decimal Capacity { get; set; }
+    public int Id { get; init; }
+    public string LicensePlate { get; init; }
+    public decimal Capacity { get; init; }
 }
