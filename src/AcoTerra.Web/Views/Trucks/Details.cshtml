@@ -58,19 +58,19 @@
         <div class="row mb-3">
             <div class="col-md-4">
                 <label class="form-label">Kilometraje</label>
-                <input type="text" class="form-control" value="@Model.TechnicalInformation.CurrentMileage" disabled="">
+                <input type="text" class="form-control" value="@Model.TechnicalInformation?.CurrentMileage" disabled="">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Combustible</label>
-                <input type="text" class="form-control" value="@Model.TechnicalInformation.FuelType" disabled="">
+                <input type="text" class="form-control" value="@Model.TechnicalInformation?.FuelType" disabled="">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Consumo</label>
-                <input type="text" class="form-control" value="@Model.TechnicalInformation.AverageConsumption" disabled="">
+                <input type="text" class="form-control" value="@Model.TechnicalInformation?.AverageConsumption" disabled="">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Capacidad de Combustible</label>
-                <input type="text" class="form-control" value="@Model.TechnicalInformation.TankSize" disabled="">
+                <input type="text" class="form-control" value="@Model.TechnicalInformation?.TankSize" disabled="">
             </div>
         </div>
 
@@ -81,19 +81,19 @@
         <div class="row mb-3">
             <div class="col-md-4">
                 <label class="form-label">Precio de Compra</label>
-                <input type="text" class="form-control" value="@Model.FinancialInformation.PurchasePrice" disabled="">
+                <input type="text" class="form-control" value="@Model.FinancialInformation?.PurchasePrice" disabled="">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Financiación</label>
-                <input type="text" class="form-control" value="@Model.FinancialInformation.Financed" disabled="">
+                <input type="text" class="form-control" value="@Model.FinancialInformation?.Financed" disabled="">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Cuotas</label>
-                <input type="text" class="form-control" value="@Model.FinancialInformation.Installments" disabled="">
+                <input type="text" class="form-control" value="@Model.FinancialInformation?.Installments" disabled="">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Saldo Pendiente</label>
-                <input type="text" class="form-control" value="@Model.FinancialInformation.OutstandingBalance" disabled="">
+                <input type="text" class="form-control" value="@Model.FinancialInformation?.OutstandingBalance" disabled="">
             </div>
         </div>
         
@@ -104,11 +104,11 @@
         <div class="row mb-3">
             <div class="col-md-4">
                 <label class="form-label">Patente</label>
-                <input type="text" class="form-control" value="@Model.Trailer.LicensePlate" disabled="">
+                <input type="text" class="form-control" value="@Model.Trailer?.LicensePlate" disabled="">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Capacidad</label>
-                <input type="text" class="form-control" value="@Model.Trailer.Capacity" disabled="">
+                <input type="text" class="form-control" value="@Model.Trailer?.Capacity" disabled="">
             </div>
         </div>
         
@@ -119,15 +119,15 @@
         <div class="row mb-3">
             <div class="col-md-4">
                 <label class="form-label">Nombre</label>
-                <input type="text" class="form-control" value="@Model.Driver.Name" disabled="">
+                <input type="text" class="form-control" value="@Model.Driver?.Name" disabled="">
             </div>
             <div class="col-md-4">
                 <label class="form-label">DNI</label>
-                <input type="text" class="form-control" value="@Model.Driver.IdentificationNumber" disabled="">
+                <input type="text" class="form-control" value="@Model.Driver?.IdentificationNumber" disabled="">
             </div>
             <div class="col-md-4">
                 <label class="form-label">Teléfono</label>
-                <input type="text" class="form-control" value="@Model.Driver.PhoneNumber" disabled="">
+                <input type="text" class="form-control" value="@Model.Driver?.PhoneNumber" disabled="">
             </div>
         </div>
     </div>
